@@ -1,0 +1,17 @@
+import { Separator } from "@/components/ui/separator";
+import React from "react";
+import NavButton from "../buttons/NavButton";
+
+const Nav = () => {
+  return (
+    <div className="flex items-center text-xs font-medium">
+      <NavButton href="/">Home</NavButton>
+      <Separator orientation="vertical" />
+      <NavButton href="/">New</NavButton>
+      <Separator orientation="vertical" />
+      <NavButton href="/">Special</NavButton>
+    </div>
+  );
+};
+
+export default Nav;

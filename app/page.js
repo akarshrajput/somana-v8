@@ -12,7 +12,7 @@ export default function Home() {
           <div className="col-span-1">
             <p className="text-center mb-6">
               <span className="border-t-2 font-bold text-sm border-red-600 pt-1">
-                TODAY'S PICK
+                TODAY PICK
               </span>
             </p>
             <div>

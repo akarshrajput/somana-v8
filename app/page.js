@@ -1,3 +1,4 @@
+import ArticleGrid from "./_components/articleComponents/ArticleGrid";
 import BestArticle from "./_components/articleComponents/BestArticle";
 import TrendingList from "./_components/articleComponents/TrendingList";
 import VerticalList from "./_components/articleComponents/VerticalList";
@@ -33,7 +34,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 mt-12">
+        <div className="grid grid-cols-3 gap-4 mt-16">
           <div className="col-span-2">
             <p className="text-center mb-6">
               <span className="border-t-2 font-bold text-sm border-red-600 pt-1">
@@ -53,6 +54,16 @@ export default function Home() {
             <div>
               <Quotes />
             </div>
+          </div>
+        </div>
+        <div className="mt-16">
+          <p className="text-center mb-6">
+            <span className="border-t-2 font-bold text-sm border-red-600 pt-1">
+              More
+            </span>
+          </p>
+          <div>
+            <ArticleGrid />
           </div>
         </div>
       </div>

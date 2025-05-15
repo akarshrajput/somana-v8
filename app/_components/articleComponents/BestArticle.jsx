@@ -45,7 +45,7 @@ const BestArticle = () => {
               <img
                 src={post.featuredImage}
                 alt={post.heading}
-                className="w-full h-full object-cover rounded"
+                className="w-full min-h-90 h-full object-cover rounded"
               />
             </div>
           </Link>

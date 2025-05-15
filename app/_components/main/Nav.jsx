@@ -7,6 +7,10 @@ const Nav = () => {
     <div className="flex items-center text-xs font-medium">
       <NavButton href="/">Home</NavButton>
       <Separator orientation="vertical" />
+      <NavButton href="/">Podcast</NavButton>
+      <Separator orientation="vertical" />
+      <NavButton href="/">Tales</NavButton>
+      <Separator orientation="vertical" />
       <NavButton href="/">New</NavButton>
       <Separator orientation="vertical" />
       <NavButton href="/">Special</NavButton>

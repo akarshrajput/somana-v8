@@ -2,6 +2,7 @@ import ArticleGrid from "./_components/articleComponents/ArticleGrid";
 import BestArticle from "./_components/articleComponents/BestArticle";
 import TrendingList from "./_components/articleComponents/TrendingList";
 import VerticalList from "./_components/articleComponents/VerticalList";
+import HeaderButton from "./_components/buttons/HeaderButton";
 import Quotes from "./_components/other/Quotes";
 import HorizontalList from "./_components/podcastComponents/HorizontalList";
 
@@ -11,11 +12,7 @@ export default function Home() {
       <div className="w-full max-w-[1200px]">
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-1">
-            <p className="text-center mb-6">
-              <span className="border-t-2 font-bold text-sm border-red-600 pt-1">
-                TODAY PICK
-              </span>
-            </p>
+            <HeaderButton>TODAY PICK</HeaderButton>
             <div>
               <VerticalList />
             </div>

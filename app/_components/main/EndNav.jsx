@@ -13,7 +13,9 @@ const EndNav = async () => {
       <Sparkle size={20} className="text-yellow-600" />
       <Separator orientation="vertical" />
       {session?.user ? (
-        <img src={session?.user?.photo} className="size-8 rounded-full" />
+        <Link href="/me">
+          <img src={session?.user?.photo} className="size-8 rounded-full" />
+        </Link>
       ) : (
         <>
           <User size={16} />

@@ -1,4 +1,5 @@
 import { Lora, Roboto_Slab } from "next/font/google";
+import Link from "next/link";
 import React from "react";
 
 const lora = Lora({
@@ -68,14 +69,16 @@ const Page = async ({ params }) => {
           {article.description}
         </p>
 
-        <div className="mt-4 flex flex-col items-center">
-          <img
-            className="rounded-full aspect-square size-8"
-            src={article.author?.photo}
-            alt={article.author?.name}
-          />
-          <p>{article.author?.name}</p>
-        </div>
+        <Link href={`/user/${article?.author?.userName}`}>
+          <div className="mt-4 flex flex-col items-center">
+            <img
+              className="rounded-full aspect-square size-8"
+              src={article.author?.photo}
+              alt={article.author?.name}
+            />
+            <p>{article.author?.name}</p>
+          </div>
+        </Link>
 
         <div className="w-full mt-6">
           <img

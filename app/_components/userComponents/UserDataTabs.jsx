@@ -2,7 +2,7 @@
 import { useState } from "react";
 import UserArticles from "../articleComponents/UserArticles";
 
-export default function UserDataTabs({ session }) {
+export default function UserDataTabs({ userId }) {
   const [activeTab, setActiveTab] = useState("article"); // default
 
   return (
@@ -29,7 +29,7 @@ export default function UserDataTabs({ session }) {
       <div>
         {activeTab === "article" && (
           <div>
-            <UserArticles session={session} />
+            <UserArticles userId={userId} />
           </div>
         )}
 

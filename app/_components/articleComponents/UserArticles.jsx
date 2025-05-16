@@ -18,9 +18,7 @@ const fetchUserArticles = async (authorID, limit) => {
   return res.data?.data?.blogs;
 };
 
-const UserArticles = ({ session, apiLimit = 10 }) => {
-  const userId = session?.user?.userId;
-
+const UserArticles = ({ userId, apiLimit = 10 }) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["userArticles", userId],
     queryFn: () => fetchUserArticles(userId, apiLimit),

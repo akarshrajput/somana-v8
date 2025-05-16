@@ -38,6 +38,35 @@ const fetchBlogData = async (slug) => {
   }
 };
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const blog = await fetchBlogData(slug);
+
+  if (!blog) {
+    return {
+      title: "Not Found",
+      description: "The blog post you are looking for does not exist.",
+    };
+  }
+
+  return {
+    title: `${blog.heading} - My Blog`,
+    description: blog.description,
+    openGraph: {
+      title: blog.heading,
+      description: blog.description,
+      images: [blog.featuredImage],
+      url: `${process.env.HOSTNAME}/blog/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.heading,
+      description: blog.description,
+      image: blog.featuredImage,
+    },
+  };
+}
+
 const Page = async ({ params }) => {
   const { slug } = await params;
   const article = await fetchBlogData(slug);

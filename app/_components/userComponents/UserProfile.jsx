@@ -1,27 +1,7 @@
 "use client";
-import axios from "axios";
 import { BadgeCheck } from "lucide-react";
-import React, { useEffect, useState } from "react";
 
-const UserProfile = ({ username }) => {
-  const [userProfile, setUserProfile] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const res = await axios.get(`/api/v1/users/userName/${username}`);
-        setUserProfile(res.data?.data || {});
-      } catch (error) {
-        console.error("Failed to fetch user profile:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, [username]);
-
+const UserProfile = ({ userProfile }) => {
   return (
     <div className="w-full">
       <div className="flex flex-col gap-6 text-sm w-full">

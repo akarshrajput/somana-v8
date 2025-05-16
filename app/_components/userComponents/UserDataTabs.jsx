@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import UserArticles from "../articleComponents/UserArticles";
+import UserPodcasts from "../podcastComponents/UserPodcasts";
 
 export default function UserDataTabs({ userId }) {
   const [activeTab, setActiveTab] = useState("article"); // default
@@ -35,8 +36,7 @@ export default function UserDataTabs({ userId }) {
 
         {activeTab === "podcast" && (
           <div>
-            <h2 className="text-lg font-semibold mb-2">Podcasts</h2>
-            <p>This is where podcasts will be displayed.</p>
+            <UserPodcasts authorID={userId} />
           </div>
         )}
       </div>

@@ -10,7 +10,7 @@ const fetchUserProfile = async (username) => {
 };
 
 const Page = async ({ params }) => {
-  const { username } = params;
+  const { username } = await params;
 
   const userProfile = await fetchUserProfile(username);
 

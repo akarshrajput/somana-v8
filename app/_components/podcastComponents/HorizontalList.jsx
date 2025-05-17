@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { PlayCircle } from "lucide-react";
@@ -18,6 +17,20 @@ const fetchPodcasts = async () => {
   return res?.data?.data?.podcasts;
 };
 
+// Skeleton Card
+const SkeletonCard = () => (
+  <div className="flex items-center gap-4 animate-pulse">
+    {/* Image skeleton */}
+    <div className="min-w-[72px] min-h-[72px] w-16 h-16 bg-gray-300 dark:bg-neutral-700 rounded" />
+
+    {/* Text skeleton */}
+    <div className="flex flex-col gap-2 flex-1">
+      <div className="w-20 h-4 bg-gray-300 dark:bg-neutral-700 rounded" />
+      <div className="w-3/4 h-5 bg-gray-300 dark:bg-neutral-700 rounded" />
+    </div>
+  </div>
+);
+
 const HorizontalList = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["podcasts"],
@@ -27,39 +40,43 @@ const HorizontalList = () => {
   return (
     <div className="w-full">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
-        {data?.map((podcast) => (
-          <PodcastPlayer
-            key={podcast._id}
-            audioUrl={podcast.audioLink}
-            image={podcast.featuredImage}
-            title={podcast.podcastName}
-            trigger={
-              <div className="flex items-center gap-4 cursor-pointer">
-                <div className="min-w-[72px] min-h-[72px] w-16 h-16 relative overflow-hidden rounded bg-neutral-100 dark:bg-neutral-800">
-                  <img
-                    src={podcast.featuredImage}
-                    alt={podcast.podcastName}
-                    className="object-cover rounded w-full h-full"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                    <PlayCircle size={20} fill color="white" />
-                  </div>
-                </div>
+        {isLoading
+          ? Array.from({ length: 9 }).map((_, idx) => (
+              <SkeletonCard key={idx} />
+            ))
+          : data?.map((podcast) => (
+              <PodcastPlayer
+                key={podcast._id}
+                audioUrl={podcast.audioLink}
+                image={podcast.featuredImage}
+                title={podcast.podcastName}
+                trigger={
+                  <div className="flex items-center gap-4 cursor-pointer">
+                    <div className="min-w-[72px] min-h-[72px] w-16 h-16 relative overflow-hidden rounded bg-neutral-100 dark:bg-neutral-800">
+                      <img
+                        src={podcast.featuredImage}
+                        alt={podcast.podcastName}
+                        className="object-cover rounded w-full h-full"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                        <PlayCircle size={20} fill color="white" />
+                      </div>
+                    </div>
 
-                <div className="flex flex-col justify-center overflow-hidden">
-                  <p className="text-xs px-2 rounded-full border border-neutral-300 w-fit text-neutral-700">
-                    {podcast.podcastType}
-                  </p>
-                  <p
-                    className={`${lora.className} text-sm font-medium text-black dark:text-white mt-1 line-clamp-2`}
-                  >
-                    {podcast.podcastName}
-                  </p>
-                </div>
-              </div>
-            }
-          />
-        ))}
+                    <div className="flex flex-col justify-center overflow-hidden">
+                      <p className="text-xs px-2 rounded-full border border-neutral-300 w-fit text-neutral-700">
+                        {podcast.podcastType}
+                      </p>
+                      <p
+                        className={`${lora.className} text-sm font-medium text-black dark:text-white mt-1 line-clamp-2`}
+                      >
+                        {podcast.podcastName}
+                      </p>
+                    </div>
+                  </div>
+                }
+              />
+            ))}
       </div>
     </div>
   );

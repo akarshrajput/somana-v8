@@ -15,41 +15,56 @@ const fetchArticles = async () => {
   return res?.data?.data?.blogs;
 };
 
+const SkeletonCard = () => {
+  return (
+    <div className="w-full animate-pulse flex flex-col gap-4">
+      <div className="h-6 bg-gray-300 rounded w-3/4 mx-auto"></div>
+      <div className="h-6 bg-gray-300 rounded w-3/4 mx-auto"></div>
+      <div className="h-4 bg-gray-300 rounded w-5/6 mx-auto"></div>
+      <div className="h-4 bg-gray-300 rounded w-5/6 mx-auto"></div>
+      <div className="w-full min-h-90 h-full bg-gray-300 rounded"></div>
+    </div>
+  );
+};
+
 const BestArticle = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["bestarticle"],
     queryFn: fetchArticles,
   });
-  //   console.log(data);
 
   return (
     <div className="w-full">
       <div className="flex flex-col gap-6 w-full">
-        {data?.map((post) => (
-          <Link
-            href={`/article/${post.slug}`}
-            key={post._id}
-            className="bg-white overflow-hidden"
-          >
-            <p
-              className={`${lora.className} text-black text-center text-3xl font-medium mb-4`}
+        {isLoading ? (
+          <SkeletonCard />
+        ) : (
+          data?.map((post) => (
+            <Link
+              href={`/article/${post.slug}`}
+              key={post._id}
+              className="bg-white overflow-hidden"
             >
-              {post.heading}
-            </p>
-            <p
-              className={`${lora.className} text-black text-center text-base font-medium mb-2`}
-            >
-              {post.description}
-            </p>
-            <div className="relative h-full bg-neutral-100 dark:bg-neutral-800">
-              <img
-                src={post.featuredImage}
-                alt={post.heading}
-                className="w-full min-h-90 h-full object-cover rounded"
-              />
-            </div>
-          </Link>
-        ))}
+              <p
+                className={`${lora.className} text-black text-center text-3xl font-medium mb-4`}
+              >
+                {post.heading}
+              </p>
+              <p
+                className={`${lora.className} text-black text-center text-base font-medium mb-2`}
+              >
+                {post.description}
+              </p>
+              <div className="relative h-full bg-neutral-100 dark:bg-neutral-800">
+                <img
+                  src={post.featuredImage}
+                  alt={post.heading}
+                  className="w-full min-h-90 h-full object-cover rounded"
+                />
+              </div>
+            </Link>
+          ))
+        )}
       </div>
     </div>
   );

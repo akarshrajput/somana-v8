@@ -2,6 +2,7 @@ import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/main/Header";
 import ReactQueryProvider from "./_components/providers/ReactQueryProvider";
+import Footer from "./_components/main/Footer";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -23,6 +24,9 @@ export default function RootLayout({ children }) {
             <Header />
           </div>
           {children}
+          <div>
+            <Footer />
+          </div>
         </ReactQueryProvider>
       </body>
     </html>

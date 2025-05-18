@@ -1,5 +1,4 @@
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 import React from "react";
 import NavBarButton from "../buttons/NavBarButton";
 
@@ -22,5 +21,4 @@ const NavBar = () => {
     </div>
   );
 };
-
 export default NavBar;

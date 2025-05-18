@@ -34,7 +34,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-background text-foreground border-t border-muted py-12">
+    <footer className="bg-background text-foreground border-t border-muted py-12 mt-32">
       <div className="w-full max-w-[1200px] mx-auto px-2">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo + Description */}

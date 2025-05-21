@@ -35,7 +35,7 @@ const UserArticles = ({ userId, apiLimit = 10 }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {data?.map((post) => (
           <Link
-            href={`/article/${post.slug}`}
+            href={`/story/${post.slug}`}
             key={post._id}
             className="bg-white dark:bg-neutral-900"
           >

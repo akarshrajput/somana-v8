@@ -42,7 +42,7 @@ const TrendingList = () => {
           ? [1, 2, 3, 4].map((i) => <SkeletonCard key={i} />)
           : data?.map((post) => (
               <Link
-                href={`/article/${post.slug}`}
+                href={`/story/${post.slug}`}
                 key={post._id}
                 className="flex items-center gap-4 transition bg-white"
               >

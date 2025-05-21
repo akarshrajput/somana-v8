@@ -41,7 +41,7 @@ const BestArticle = () => {
         ) : (
           data?.map((post) => (
             <Link
-              href={`/article/${post.slug}`}
+              href={`/story/${post.slug}`}
               key={post._id}
               className="bg-white overflow-hidden"
             >

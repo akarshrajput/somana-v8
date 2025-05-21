@@ -40,7 +40,7 @@ const ArticleGrid = () => {
           ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
           : data?.map((post) => (
               <Link
-                href={`/article/${post.slug}`}
+                href={`/story/${post.slug}`}
                 key={post._id}
                 className="bg-white overflow-hidden"
               >

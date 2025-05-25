@@ -1,3 +1,4 @@
+import IFrameViewer from "@/app/_components/articleComponents/IFrameViewer";
 import { Lora, Roboto_Slab } from "next/font/google";
 import Link from "next/link";
 import React from "react";
@@ -108,14 +109,23 @@ const Page = async ({ params }) => {
             <p>{article.author?.name}</p>
           </div>
         </Link>
+        {article?.genre === "Notes" ? (
+          ""
+        ) : (
+          <div className="w-full mt-6">
+            <img
+              className="rounded-md w-full"
+              src={article.featuredImage}
+              alt="Featured"
+            />
+          </div>
+        )}
 
-        <div className="w-full mt-6">
-          <img
-            className="rounded-md w-full"
-            src={article.featuredImage}
-            alt="Featured"
-          />
-        </div>
+        {article?.fileLinks?.length > 0 ? (
+          <IFrameViewer fileLinks={article.fileLinks} />
+        ) : (
+          ""
+        )}
 
         <div className="grid grid-cols-6">
           <div

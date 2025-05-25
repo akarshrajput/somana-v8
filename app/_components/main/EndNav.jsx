@@ -1,6 +1,13 @@
 import { auth } from "@/app/_lib/auth";
 import { Separator } from "@/components/ui/separator";
-import { Search, Sparkle, User } from "lucide-react";
+import {
+  PenBoxIcon,
+  PenIcon,
+  PenSquare,
+  Search,
+  Sparkle,
+  User,
+} from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -8,10 +15,25 @@ const EndNav = async () => {
   const session = await auth();
   return (
     <div className="ml-auto flex gap-2 items-center text-xs font-medium">
-      <Search size={16} />
-      <Separator orientation="vertical" />
-      <Sparkle size={20} className="text-yellow-600" />
-      <Separator orientation="vertical" />
+      <div className="flex items-center gap-2 mr-2">
+        <Search size={16} />
+        <Separator orientation="vertical" />
+        {session?.user ? (
+          <div className="flex items-center gap-2">
+            {/* <Link href="/story/write">
+              <PenSquare size={16} />
+            </Link> */}
+            <Link
+              href="upload"
+              className="bg-neutral-100 p-1 px-2 rounded border"
+            >
+              Upload
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
       {session?.user ? (
         <Link href="/me">
           <img src={session?.user?.photo} className="size-8 rounded-full" />

@@ -15,7 +15,7 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { Button } from "@/components/ui/button";
 
-function PodcastPlayer({ audioUrl, image, title, trigger, description }) {
+function MusicPlayer({ audioUrl, image, title, artist, trigger }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
@@ -29,18 +29,26 @@ function PodcastPlayer({ audioUrl, image, title, trigger, description }) {
             />
           </div>
           <div>
-            <p className="text-sm font-medium mb-1 line-clamp-1">{title}</p>
-            <p className="text-xs">{description}</p>
+            <AlertDialogTitle className="text-xl font-bold">
+              {title}
+            </AlertDialogTitle>
+            {artist && (
+              <p className="text-sm text-neutral-400 font-medium mt-1">
+                {artist}
+              </p>
+            )}
           </div>
-          <AlertDialogDescription className="mt-4">
-            <AudioPlayer
-              autoPlay
-              src={audioUrl}
-              layout="stacked-reverse"
-              className="rounded-lg overflow-hidden"
-            />
-          </AlertDialogDescription>
         </AlertDialogHeader>
+
+        <AlertDialogDescription className="mt-4">
+          <AudioPlayer
+            autoPlay
+            src={audioUrl}
+            layout="stacked-reverse"
+            className="rounded-lg overflow-hidden"
+          />
+        </AlertDialogDescription>
+
         <AlertDialogFooter className="mt-4">
           <AlertDialogCancel>Close</AlertDialogCancel>
         </AlertDialogFooter>
@@ -49,4 +57,4 @@ function PodcastPlayer({ audioUrl, image, title, trigger, description }) {
   );
 }
 
-export default PodcastPlayer;
+export default MusicPlayer;

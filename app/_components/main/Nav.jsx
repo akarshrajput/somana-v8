@@ -9,6 +9,10 @@ const Nav = () => {
       <Separator orientation="vertical" />
       <NavButton href="/">Podcast</NavButton>
       <Separator orientation="vertical" />
+      <NavButton href="/">Music</NavButton>
+      <Separator orientation="vertical" />
+      <NavButton href="/">Playlists</NavButton>
+      <Separator orientation="vertical" />
       <NavButton href="/">Tales</NavButton>
       <Separator orientation="vertical" />
       <NavButton href="/">New</NavButton>

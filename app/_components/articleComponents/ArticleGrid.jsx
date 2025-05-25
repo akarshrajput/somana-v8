@@ -54,7 +54,9 @@ const ArticleGrid = () => {
                 <p className="text-xs px-2 rounded-full border w-fit mt-1">
                   {post.tags}
                 </p>
-                <p className={`${lora.className} text-black font-medium mt-1`}>
+                <p
+                  className={`${lora.className} text-black font-medium mt-1 line-clamp-2`}
+                >
                   {post.heading}
                 </p>
                 <p

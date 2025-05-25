@@ -3,6 +3,7 @@ import BestArticle from "./_components/articleComponents/BestArticle";
 import TrendingList from "./_components/articleComponents/TrendingList";
 import VerticalList from "./_components/articleComponents/VerticalList";
 import HeaderButton from "./_components/buttons/HeaderButton";
+import MusicHorizontalList from "./_components/musicComponents/MusicHorizontalList";
 import Quotes from "./_components/other/Quotes";
 import HorizontalList from "./_components/podcastComponents/HorizontalList";
 
@@ -61,6 +62,18 @@ export default function Home() {
           </p>
           <div>
             <ArticleGrid />
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-4 mt-16">
+          <div className="col-span-full">
+            <p className="text-center mb-6">
+              <span className="border-t-2 font-bold text-sm border-red-600 pt-1">
+                MUSIC
+              </span>
+            </p>
+            <div>
+              <MusicHorizontalList />
+            </div>
           </div>
         </div>
       </div>

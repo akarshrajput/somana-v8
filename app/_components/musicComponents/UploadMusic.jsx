@@ -1,15 +1,12 @@
 "use client";
 import supabase from "@/app/_lib/supabase";
-import { Info, Upload } from "@phosphor-icons/react/dist/ssr";
 import React, { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
-import SpinnerMain from "../main/SpinnerMain";
-import { ToastAction } from "@/components/ui/toast";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Select,
@@ -40,8 +37,6 @@ const UploadMusic = ({ supabaseURL, session, hostname }) => {
   const [songLang, setSongLang] = useState("Hindi");
   const [lyrics, setLyrics] = useState("");
   const [isLoading, setIsLoading] = useState("");
-
-  const { toast } = useToast();
 
   const musicCategories = [
     "Love",
@@ -88,37 +83,45 @@ const UploadMusic = ({ supabaseURL, session, hostname }) => {
       !credits ||
       !album
     ) {
-      toast({
-        title: "Field Error",
+      toast("Field Error", {
         description: "Please fill all input fields",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
       });
       return;
     }
 
     if (audioLink.type.split("/")[0] !== "audio") {
-      toast({
-        title: "Type Error",
-        description: "Only Audio file is allowed",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      toast("Field Error", {
+        description: "Please fill all input fields",
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
       });
       return;
     }
 
     if (featuredImage.type.split("/")[0] !== "image") {
-      toast({
-        title: "Type Error",
-        description: "Only Image file is allowed",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      toast("Field Error", {
+        description: "Please fill all input fields",
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
       });
       return;
     }
 
     try {
-      toast({
-        title: "Uploading Progress",
-        description: "Uploading data in progress",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      toast("Field Error", {
+        description: "Please fill all input fields",
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
       });
       setIsLoading(true);
       const imageName = `${Math.random()}-${Date.now()}-${featuredImage?.name}`;
@@ -140,40 +143,48 @@ const UploadMusic = ({ supabaseURL, session, hostname }) => {
       };
       console.log(musicData);
 
-      toast({
-        title: "Uploading Progress",
-        description: "Uploading Audio Image",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      toast("Field Error", {
+        description: "Please fill all input fields",
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
       });
       const avatarImage = featuredImage;
       await supabase.storage
         .from("audio-track-images")
         .upload(imageName, avatarImage);
 
-      toast({
-        title: "Uploading Progress",
-        description: "Uploading Audio File",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      toast("Field Error", {
+        description: "Please fill all input fields",
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
       });
       const avatarAudio = audioLink;
       await supabase.storage
         .from("audio-tracks")
         .upload(audioName, avatarAudio);
 
-      toast({
-        title: "Uploading Progress",
-        description: "Uploading Audio Data",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      toast("Field Error", {
+        description: "Please fill all input fields",
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
       });
       const response = await axios.post(`/api/v1/music`, musicData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      toast({
-        title: "Uploaded Successfully",
-        description: "Audio data uploaded successfully",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      toast("Field Error", {
+        description: "Please fill all input fields",
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
       });
       // const slug = response?.data?.data?.newBlog?.slug;
       // toast.success("Music Uploaded Success!");
@@ -189,10 +200,12 @@ const UploadMusic = ({ supabaseURL, session, hostname }) => {
       setCredits("");
       setAlbum("");
     } catch (error) {
-      toast({
-        title: "Error Uploading!",
-        description: "Audio data not uploaded!",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      toast("Field Error", {
+        description: "Please fill all input fields",
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
       });
       console.log("Error");
     } finally {
@@ -337,8 +350,7 @@ const UploadMusic = ({ supabaseURL, session, hostname }) => {
 
         <Button disabled={isLoading} className="w-fit">
           {isLoading ? (
-            // <LoaderSmall />
-            <SpinnerMain />
+            <p>Loading</p>
           ) : (
             <div className="flex items-center gap-1">
               <p>Upload</p>

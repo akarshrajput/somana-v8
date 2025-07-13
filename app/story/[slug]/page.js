@@ -107,23 +107,32 @@ const Page = async ({ params }) => {
           {article.description}
         </p>
         <div className="my-2 flex items-center gap-4">
-          <LikeButton
-            blogId={slug}
-            initialLikes={article.likesCount}
-            userId={session.user.userId}
-          />
+          {session?.user ? (
+            <LikeButton
+              blogId={slug}
+              initialLikes={article.likesCount}
+              userId={session.user.userId}
+            />
+          ) : null}
           <p className="font-medium  dark:bg-gray-800 p-1 px-2 rounded-md text-sm">
             {article.viewsCount} views
           </p>
-          {article?._id ? (
-            <Link href={`/story/edit/${article?._id}`}>
-              <Button variant="secondary">
-                <Pen weight="bold" />
-                Edit
-              </Button>
-            </Link>
-          ) : null}
-          <DeleteButton blogId={article?._id} />
+
+          {session &&
+            (session.user.userId === article.author._id ||
+              session.user.role === "admin") && (
+              <div className="flex items-center gap-2">
+                {article?._id && (
+                  <Link href={`/story/edit/${article._id}`}>
+                    <Button variant="secondary">
+                      <Pen weight="bold" />
+                      Edit
+                    </Button>
+                  </Link>
+                )}
+                <DeleteButton blogId={article._id} />
+              </div>
+            )}
         </div>
 
         <Link href={`/user/${article?.author?.userName}`}>

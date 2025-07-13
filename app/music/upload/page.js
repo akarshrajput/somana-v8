@@ -9,8 +9,8 @@ const page = async () => {
   const hostname = process.env.HOSTNAME;
 
   return (
-    <div className="mt-4 flex justify-center">
-      <div className="w-full">
+    <div className="px-2 my-10 mt-24 flex justify-center">
+      <div className="w-[1200px]">
         {session.user.role === "admin" || session.user.role === "guide" ? (
           <UploadMusic
             session={session}

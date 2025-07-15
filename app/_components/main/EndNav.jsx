@@ -10,13 +10,14 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import SearchInput from "./SearchInput";
 
 const EndNav = async () => {
   const session = await auth();
   return (
     <div className="ml-auto flex gap-2 items-center text-xs font-medium">
       <div className="flex items-center gap-2 mr-2">
-        <Search size={16} />
+        <SearchInput />
         <Separator orientation="vertical" />
         {session?.user ? (
           <div className="flex items-center gap-2">

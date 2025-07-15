@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./_components/main/Header";
 import ReactQueryProvider from "./_components/providers/ReactQueryProvider";
 import Footer from "./_components/main/Footer";
+import Script from "next/script";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],

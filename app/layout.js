@@ -18,6 +18,38 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Add Google Analytics script */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-4T3N7M8Q6Y"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-4T3N7M8Q6Y');
+            `,
+          }}
+        />
+
+        {/* Google Adsense script */}
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-3750195818284635"
+        ></meta>
+
+        {/* Global Ads script of adsense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3750195818284635"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={`${dmSans.className} antialiased`}>
         <ReactQueryProvider>
           <div className="sticky top-0 left-0 w-full z-50">

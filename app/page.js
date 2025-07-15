@@ -9,7 +9,7 @@ import HorizontalList from "./_components/podcastComponents/HorizontalList";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center my-32">
+    <div className="flex flex-col items-center my-24">
       <div className="w-full max-w-[1200px] px-2">
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-1">

@@ -3,6 +3,7 @@ import BlogComments from "@/app/_components/articleComponents/BlogComments";
 import DeleteButton from "@/app/_components/articleComponents/DeleteBlog";
 import IFrameViewer from "@/app/_components/articleComponents/IFrameViewer";
 import LikeButton from "@/app/_components/articleComponents/LikeButton";
+import VerticalAd from "@/app/_components/googleads/vertical_ad";
 import { auth } from "@/app/_lib/auth";
 import { Button } from "@/components/ui/button";
 import { Pen } from "lucide-react";
@@ -91,6 +92,7 @@ const Page = async ({ params }) => {
   return (
     <div className="mt-44 flex flex-col items-center p-1">
       <div className="w-full max-w-[860px] flex flex-col items-center">
+        <VerticalAd />
         <p className="text-sm border w-fit rounded-full px-4 py-1.5 border-stone-600">
           19th Century
         </p>

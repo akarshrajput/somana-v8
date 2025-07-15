@@ -1,10 +1,12 @@
+export const dynamic = "force-dynamic";
+
+import { Suspense } from "react";
 import Search from "../_components/main/Search";
 
-const page = () => {
+export default function Page() {
   return (
-    <div>
+    <Suspense fallback={<div className="p-4">Loading...</div>}>
       <Search />
-    </div>
+    </Suspense>
   );
-};
-export default page;
+}

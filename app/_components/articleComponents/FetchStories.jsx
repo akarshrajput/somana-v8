@@ -1,13 +1,7 @@
 "use client";
 import { BookOpen, Sparkle, Verified } from "lucide-react";
-import { Rubik } from "next/font/google";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
-const rubik = Rubik({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
 
 const FetchStories = ({ q }) => {
   const [blogs, setBlogs] = useState([]);
@@ -73,7 +67,7 @@ const FetchStories = ({ q }) => {
             </div>
           </div>
 
-          <Link href={`/story/${post.slug}`} className={`${rubik.className}`}>
+          <Link href={`/story/${post.slug}`}>
             <h3 className="font-semibold text-sm truncate mb-1 leading-5">
               {post.heading}
             </h3>

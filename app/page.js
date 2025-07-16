@@ -3,14 +3,18 @@ import BestArticle from "./_components/articleComponents/BestArticle";
 import TrendingList from "./_components/articleComponents/TrendingList";
 import VerticalList from "./_components/articleComponents/VerticalList";
 import HeaderButton from "./_components/buttons/HeaderButton";
+import TagSlider from "./_components/main/TagSlider";
 import MusicHorizontalList from "./_components/musicComponents/MusicHorizontalList";
 import Quotes from "./_components/other/Quotes";
 import HorizontalList from "./_components/podcastComponents/HorizontalList";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center my-24">
+    <div className="flex flex-col items-center my-4">
       <div className="w-full max-w-[1200px] px-2">
+        <div className="pb-12">
+          <TagSlider />
+        </div>
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-1">
             <HeaderButton>TODAY PICK</HeaderButton>

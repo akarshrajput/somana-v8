@@ -3,25 +3,63 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const tags = [
-  "All",
+  "Notes",
+  "Blog",
+  "Automotive",
+  "Beauty",
+  "Books",
+  "Business",
+  "Career",
+  "Cryptocurrency",
+  "Culture",
+  "Crafts",
+  "Design",
+  "Education",
+  "Entertainment",
+  "Environmental",
+  "Fashion",
+  "Finance",
+  "Fitness",
+  "Food",
   "Gaming",
+  "Gardening",
+  "Health",
+  "History",
+  "Home",
+  "Humor",
+  "Interests",
+  "Investing",
+  "Legal",
+  "Lifestyle",
+  "Luxury",
+  "Marketing",
+  "Movies",
   "Music",
-  "Science fiction",
-  "Mixes",
-  "Reptiles",
-  "Action Thrillers",
-  "Film criticisms",
-  "Robot",
-  "Shark Tank",
-  "The Lego Group",
-  "Array",
-  "JavaScript",
-  "Insects",
-  "Live",
+  "News",
+  "Nonprofit",
+  "Parenting",
+  "Pets",
+  "Photography",
+  "Politics",
+  "Estate",
+  "Relationships",
+  "Science",
+  "Shopping",
+  "Social",
+  "Space",
+  "Spirituality",
+  "Sports",
+  "Startups",
+  "Story",
+  "Technology",
+  "Tips",
+  "Travel",
+  "Volunteer",
+  "Writing",
 ];
-
 export default function TagSlider() {
   const [activeTag, setActiveTag] = useState("All");
   const scrollRef = useRef(null);
@@ -82,17 +120,18 @@ export default function TagSlider() {
         className="flex gap-2 overflow-x-auto scroll-smooth no-scrollbar"
       >
         {tags.map((tag) => (
-          <Button
-            key={tag}
-            variant="outline"
-            size="sm"
-            onClick={() => setActiveTag(tag)}
-            className={`whitespace-nowrap px-4 py-2 text-sm border transition-colors ${
-              activeTag === tag ? "border-black font-semibold" : ""
-            }`}
-          >
-            {tag}
-          </Button>
+          <Link key={tag} href={`/story/topic/${tag}`}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setActiveTag(tag)}
+              className={`whitespace-nowrap cursor-pointer text-sm border transition-colors ${
+                activeTag === tag ? "border-black font-semibold" : ""
+              }`}
+            >
+              {tag}
+            </Button>
+          </Link>
         ))}
       </div>
 

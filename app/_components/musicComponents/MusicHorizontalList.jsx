@@ -47,6 +47,7 @@ const MusicHorizontalList = () => {
                 audioUrl={track.audioLink}
                 image={track.featuredImage}
                 title={track.musicName}
+                trackId={track.id}
                 trigger={
                   <div className="flex items-center gap-4 cursor-pointer">
                     <div className="min-w-[72px] min-h-[72px] w-16 h-16 relative overflow-hidden rounded ">

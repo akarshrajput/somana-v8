@@ -14,8 +14,9 @@ import {
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-function MusicPlayer({ audioUrl, image, title, artist, trigger }) {
+function MusicPlayer({ audioUrl, image, title, artist, trigger, trackId }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
@@ -50,6 +51,9 @@ function MusicPlayer({ audioUrl, image, title, artist, trigger }) {
         </AlertDialogDescription>
 
         <AlertDialogFooter className="mt-4">
+          <Link href={`/music/${trackId}`}>
+            <Button variant="outline">Open</Button>
+          </Link>
           <AlertDialogCancel>Close</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>

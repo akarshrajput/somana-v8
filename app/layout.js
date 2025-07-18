@@ -39,17 +39,17 @@ export default function RootLayout({ children }) {
         />
 
         {/* Google Adsense script */}
-        {/* <meta
+        <meta
           name="google-adsense-account"
           content="ca-pub-3750195818284635"
-        ></meta> */}
+        ></meta>
 
         {/* Global Ads script of adsense */}
-        {/* <Script
+        <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3750195818284635"
           crossOrigin="anonymous"
-        /> */}
+        />
       </head>
       <body className={`${dmSans.className} antialiased`}>
         <ReactQueryProvider>

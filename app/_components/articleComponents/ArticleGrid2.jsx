@@ -109,9 +109,14 @@ const ArticleGrid2 = ({ topic }) => {
                     className="w-full h-full object-cover rounded"
                   />
                 </div>
-                <p className="text-xs px-2 rounded-full border w-fit mt-1">
-                  {post.tags}
-                </p>
+                <div className="flex gap-2 mt-1.5">
+                  <p className="text-xs bg-gray-100 px-2 rounded-sm border border-neutral-300 dark:border-neutral-600 w-fit text-neutral-700 dark:text-neutral-300">
+                    {post.genre}
+                  </p>
+                  <p className="text-xs px-2 rounded-sm border border-neutral-300 dark:border-neutral-600 w-fit text-neutral-700 dark:text-neutral-300">
+                    {post.tags}
+                  </p>
+                </div>
                 <p
                   className={`${lora.className} text-black font-medium mt-1 line-clamp-2`}
                 >

@@ -62,9 +62,11 @@ const MusicHorizontalList = () => {
                     </div>
 
                     <div className="flex flex-col justify-center overflow-hidden">
-                      <p className="text-xs px-2 rounded-full border border-neutral-300 w-fit text-neutral-700">
-                        {track.musicType}
-                      </p>
+                      <div className="flex gap-2">
+                        <p className="text-xs  px-2 rounded-sm border border-neutral-300 dark:border-neutral-600 w-fit text-neutral-700 dark:text-neutral-300">
+                          {track.musicType}
+                        </p>
+                      </div>
                       <p
                         className={`${lora.className} text-sm font-medium text-black dark:text-white mt-1 line-clamp-2`}
                       >

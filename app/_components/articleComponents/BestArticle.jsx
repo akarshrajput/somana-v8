@@ -51,7 +51,7 @@ const BestArticle = () => {
                 {post.heading}
               </p>
               <p
-                className={` text-black text-center text-base line-clamp-2 font-medium mb-2`}
+                className={`${lora.className} text-black text-center text-base line-clamp-2 font-medium mb-2`}
               >
                 {post.description}
               </p>

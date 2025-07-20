@@ -1,4 +1,3 @@
-// app/_components/main/GlobalLoader.tsx OR .js
 "use client";
 
 import { useEffect, useState } from "react";
@@ -7,16 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 const GlobalLoader = () => {
   const [visible, setVisible] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setVisible(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-white  backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-white backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

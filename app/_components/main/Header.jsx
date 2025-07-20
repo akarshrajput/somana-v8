@@ -2,7 +2,6 @@ import React from "react";
 import Logo from "./Logo";
 import Nav from "./Nav";
 import EndNav from "./EndNav";
-import NavBar from "./NavBar";
 
 const Header = () => {
   return (
@@ -12,9 +11,6 @@ const Header = () => {
         <Nav />
         <EndNav />
       </div>
-      {/* <div className="items-center text-xs  border-stone-100">
-        <NavBar />
-      </div> */}
     </div>
   );
 };

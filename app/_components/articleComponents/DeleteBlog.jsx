@@ -53,7 +53,7 @@ const DeleteButton = ({ blogId }) => {
     <div>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="destructive">
+          <Button variant="destructive" size="sm">
             Delete <Trash weight="bold" />
           </Button>
         </AlertDialogTrigger>

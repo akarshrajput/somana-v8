@@ -27,7 +27,7 @@ export default function SearchInput() {
           placeholder="Search"
           className="w-64 outline-none"
         />
-        <Button size="icon">
+        <Button variant="outline" className="cursor-pointer" size="icon">
           <Search weight="bold" />
         </Button>
       </form>

@@ -59,7 +59,7 @@ const AddComment = ({ session, hostname, blogId, authorId }) => {
   // }
 
   return (
-    <div className="add-comment w-full max-w-3xl mx-auto p-2 bg-white dark:bg-black rounded-md">
+    <div className="add-comment w-full mx-auto p-2 bg-white dark:bg-black rounded-md">
       <form onSubmit={handleSubmit} className="flex gap-2">
         <img className="size-8 rounded-md" src={`${session.user.photo}`} />
         <div className="w-full flex flex-col gap-2 border rounded-md p-1.5">

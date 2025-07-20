@@ -92,9 +92,9 @@ const Page = async ({ params }) => {
   return (
     <div className="mt-44 flex flex-col items-center p-1">
       <div className="w-full max-w-[860px] flex flex-col items-center">
-        <VerticalAd />
+        {/* <VerticalAd /> */}
         <p className="text-sm border w-fit rounded-full px-4 py-1.5 border-stone-600">
-          19th Century
+          {article?.genre}
         </p>
 
         <p
@@ -108,7 +108,7 @@ const Page = async ({ params }) => {
         >
           {article.description}
         </p>
-        <div className="my-2 flex items-center gap-4">
+        <div className="my-4 flex items-center gap-4">
           {session?.user ? (
             <LikeButton
               blogId={slug}
@@ -126,7 +126,7 @@ const Page = async ({ params }) => {
               <div className="flex items-center gap-2">
                 {article?._id && (
                   <Link href={`/story/edit/${article._id}`}>
-                    <Button variant="secondary">
+                    <Button variant="secondary" size="sm">
                       <Pen weight="bold" />
                       Edit
                     </Button>
@@ -144,7 +144,7 @@ const Page = async ({ params }) => {
               src={article.author?.photo}
               alt={article.author?.name}
             />
-            <p>{article.author?.name}</p>
+            <p className="font-semibold text-sm mt-1">{article.author?.name}</p>
           </div>
         </Link>
         {article?.genre === "Notes" ? (
@@ -167,7 +167,7 @@ const Page = async ({ params }) => {
 
         <div className="grid grid-cols-6">
           <div
-            className={`${crimsonText.className} col-span-5 leading-normal my-10 custom-link text-xl text-gray-700 dark:text-gray-200`}
+            className={`${crimsonText.className} font-medium col-span-5 leading-normal my-10 custom-link text-xl text-gray-900 dark:text-gray-200`}
             dangerouslySetInnerHTML={{ __html: modifiedContent }}
           ></div>
         </div>

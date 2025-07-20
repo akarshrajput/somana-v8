@@ -46,15 +46,16 @@ const BestArticle = () => {
               className="bg-white overflow-hidden"
             >
               <p
-                className={`${lora.className} text-black text-center text-3xl font-medium mb-4`}
+                className={`${lora.className} text-black text-center text-3xl font-medium mb-2`}
               >
                 {post.heading}
               </p>
               <p
-                className={`${lora.className} text-black text-center text-base font-medium mb-2`}
+                className={` text-black text-center text-base line-clamp-2 font-medium mb-2`}
               >
                 {post.description}
               </p>
+
               <div className="relative h-full bg-neutral-100 dark:bg-neutral-800">
                 <img
                   src={post.featuredImage}

@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import React from "react";
 import SearchInput from "./SearchInput";
+import { Button } from "@/components/ui/button";
 
 const EndNav = async () => {
   const session = await auth();
@@ -24,11 +25,10 @@ const EndNav = async () => {
             {/* <Link href="/story/write">
               <PenSquare size={16} />
             </Link> */}
-            <Link
-              href="/upload"
-              className="bg-neutral-100 p-1 px-2 rounded border"
-            >
-              Upload
+            <Link href="/upload">
+              <Button variant="outline" className="cursor-pointer" size="sm">
+                Upload
+              </Button>
             </Link>
           </div>
         ) : (

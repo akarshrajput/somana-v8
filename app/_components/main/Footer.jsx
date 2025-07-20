@@ -61,7 +61,7 @@ const Footer = () => {
                 <Mail className="h-5 w-5 hover:text-primary transition" />
               </Link>
             </div>
-            <p className="mt-4 font-medium text-gray-600 text-sm">
+            <div className="mt-4 font-medium text-gray-600 text-sm">
               {/* <a
                 href="https://www.linkedin.com/in/akarshrajput"
                 target="_blank"
@@ -70,7 +70,7 @@ const Footer = () => {
                 Akarsh Rajput | Founder & CEO
               </a> */}
               <p>Not disclosed | Founder & CEO</p>
-            </p>
+            </div>
           </div>
 
           {/* Footer Links */}

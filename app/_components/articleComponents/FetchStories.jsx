@@ -1,108 +1,178 @@
 "use client";
-import { BookOpen, Sparkle, Verified } from "lucide-react";
+
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { Lora } from "next/font/google";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationPrevious,
+  PaginationNext,
+} from "@/components/ui/pagination";
+import { Button } from "@/components/ui/button";
+
+// Font
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+// Skeleton loader
+const SkeletonCard = () => (
+  <div className="bg-white overflow-hidden animate-pulse">
+    <div className="relative h-32 bg-gray-300 dark:bg-neutral-800 rounded" />
+    <div className="mt-2">
+      <div className="h-5 w-20 bg-gray-300 dark:bg-neutral-700 rounded mb-2" />
+      <div className="h-6 w-3/4 bg-gray-300 dark:bg-neutral-700 rounded mb-3" />
+      <div className="h-5 w-full bg-gray-300 dark:bg-neutral-700 rounded mb-2" />
+      <div className="h-5 w-5/6 bg-gray-300 dark:bg-neutral-700 rounded" />
+    </div>
+  </div>
+);
+
+const fetchArticles = async ({ queryKey }) => {
+  const [_key, page, q] = queryKey;
+  const limit = 8;
+  const res = await axios.get(
+    `/api/v1/blogs?page=${page}&limit=${limit}&heading=${q}`
+  );
+  const blogs = res.data?.data?.blogs || [];
+
+  return {
+    blogs,
+    hasMore: blogs.length === limit,
+  };
+};
 
 const FetchStories = ({ q }) => {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const limit = 8;
+  const maxButtonsToShow = 8;
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["articles3", page, q],
+    queryFn: fetchArticles,
+    keepPreviousData: true,
+  });
+
+  const blogs = data?.blogs || [];
+  const hasMore = data?.hasMore;
+
+  const [lastKnownPage, setLastKnownPage] = useState(8); // start with 8 buttons always
 
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`/api/v1/blogs?heading=${q}&limit=12`);
-        if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
-        }
-        const data = await response.json();
-        const blogs = data?.data?.blogs;
+    if (hasMore && page >= lastKnownPage) {
+      setLastKnownPage((prev) => Math.max(prev, page + 1));
+    }
+  }, [hasMore, page, lastKnownPage]);
 
-        setBlogs(blogs); // Assuming the API returns an array of blogs
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Get visible pages (always 8)
+  const getVisiblePages = () => {
+    const pages = [];
+    const middle = Math.floor(maxButtonsToShow / 2);
 
-    fetchBlogs();
-  }, [q]);
+    let start = Math.max(1, page - middle + 1);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+    if (start + maxButtonsToShow - 1 > lastKnownPage) {
+      start = Math.max(1, lastKnownPage - maxButtonsToShow + 1);
+    }
+
+    for (let i = 0; i < maxButtonsToShow; i++) {
+      const pageNum = start + i;
+      pages.push(pageNum);
+    }
+
+    return pages;
+  };
 
   return (
-    <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-      {blogs.map((post, index) => (
-        <Link
-          href={`/story/${post.slug}`}
-          key={post.id}
-          className="flex cursor-pointer flex-col hover:bg-neutral-100 duration-300 p-2 gap-1 rounded-lg dark:hover:bg-neutral-800"
-        >
-          <div className="flex items-center gap-2">
-            <img
-              alt="Author"
-              src={post.author.photo}
-              className="h-6 w-6 rounded-full"
-            />
-            <div className="text-xs font-medium flex items-center gap-1">
+    <div className="w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {isLoading
+          ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
+          : blogs.map((post) => (
               <Link
-                href={`profile/${post.author.userName}`}
-                className="hover:underline"
+                href={`/story/${post.slug}`}
+                key={post._id}
+                className="bg-white overflow-hidden"
               >
-                {post.author.name}
-              </Link>
-              {post.author.verified && (
-                <Verified className="text-black size-3" weight="fill" />
-              )}
-              in
-              <Link
-                href={`/blogs/topic/${post.genre}`}
-                className="hover:underline"
-              >
-                {post.genre}
-              </Link>
-            </div>
-          </div>
-
-          <Link href={`/story/${post.slug}`}>
-            <h3 className="font-semibold text-sm truncate mb-1 leading-5">
-              {post.heading}
-            </h3>
-          </Link>
-
-          <div className="relative">
-            <div className="flex justify-center w-full overflow-hidden h-40 md:h-40 rounded-sm">
-              <img
-                src={post?.featuredImage}
-                className="w-full h-full object-cover rounded-md hover:rounded-sm duration-500"
-                alt="Featured Image"
-              />
-            </div>
-            <div className="absolute bottom-2 left-2 flex items-center gap-1">
-              <BookOpen
-                weight="bold"
-                className="size-6 text-black bg-neutral-100 p-1 rounded-full"
-              />
-
-              <div>
-                {post.usedAI && (
-                  <Sparkle
-                    className="size-6 text-yellow-700 bg-neutral-100 p-1 rounded-full"
-                    weight="fill"
+                <div className="relative h-32 bg-neutral-100 dark:bg-neutral-800">
+                  <img
+                    src={post.featuredImage}
+                    alt={post.heading}
+                    className="w-full h-full object-cover rounded"
                   />
-                )}
-              </div>
-            </div>
-          </div>
+                </div>
+                <p className="text-xs px-2 rounded-full border w-fit mt-1">
+                  {post.tags}
+                </p>
+                <p
+                  className={`${lora.className} text-black font-medium mt-1 line-clamp-2`}
+                >
+                  {post.heading}
+                </p>
+                <p
+                  className={`${lora.className} text-black text-sm line-clamp-2 font-medium mt-2`}
+                >
+                  {post.description}
+                </p>
+              </Link>
+            ))}
+      </div>
 
-          {/* <p className="text-xs text-gray-500 dark:text-gray-300 mt-1 line-clamp-3">
-          {post.description.substring(0, 100)}...
-        </p> */}
-        </Link>
-      ))}
+      {/* Pagination */}
+      <div className="flex justify-center mt-10 mb-6">
+        <Pagination>
+          <PaginationContent>
+            {/* Previous */}
+            <PaginationItem>
+              <PaginationPrevious
+                variant="outline"
+                onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                className={
+                  page === 1
+                    ? "pointer-events-none opacity-50 cursor-pointer"
+                    : "cursor-pointer"
+                }
+              />
+            </PaginationItem>
+
+            {/* Page Numbers */}
+            {getVisiblePages().map((p) => (
+              <PaginationItem key={p}>
+                <Button
+                  variant={p === page ? "default" : "outline"}
+                  onClick={() => setPage(p)}
+                  className="cursor-pointer"
+                  size="icon"
+                >
+                  {p}
+                </Button>
+              </PaginationItem>
+            ))}
+
+            {/* Next */}
+            <PaginationItem>
+              <PaginationNext
+                onClick={() => {
+                  if (hasMore) {
+                    setPage((prev) => prev + 1);
+                  }
+                }}
+                className={
+                  !hasMore
+                    ? "pointer-events-none opacity-50 cursor-pointer"
+                    : "cursor-pointer"
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
     </div>
   );
 };

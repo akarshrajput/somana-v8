@@ -1,4 +1,5 @@
-import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
+// app/layout.jsx or app/layout.js
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/main/Header";
 import ReactQueryProvider from "./_components/providers/ReactQueryProvider";
@@ -20,7 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Add Google Analytics script */}
+        {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-4T3N7M8Q6Y"
           strategy="afterInteractive"
@@ -38,26 +39,28 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        {/* Google Adsense script */}
-        <meta
-          name="google-adsense-account"
-          content="ca-pub-3750195818284635"
-        ></meta>
-
-        {/* Global Ads script of adsense */}
+        {/* Google AdSense */}
+        <meta name="google-adsense-account" content="ca-pub-3750195818284635" />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3750195818284635"
           crossOrigin="anonymous"
         />
       </head>
+
       <body className={`${dmSans.className} antialiased`}>
         <ReactQueryProvider>
-          <div className="sticky top-0 left-0 w-full z-50">
-            <Header />
-          </div>
-          {children}
-          <div>
+          {/* Full-height layout wrapper */}
+          <div className="flex min-h-screen flex-col">
+            {/* Sticky Header */}
+            <div className="sticky top-0 left-0 w-full z-50">
+              <Header />
+            </div>
+
+            {/* Main Content grows to push footer down */}
+            <main className="flex-1">{children}</main>
+
+            {/* Footer sticks to bottom */}
             <Footer />
           </div>
         </ReactQueryProvider>

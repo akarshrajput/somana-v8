@@ -40,12 +40,12 @@ export default function RootLayout({ children }) {
         />
 
         {/* Google AdSense */}
-        <meta name="google-adsense-account" content="ca-pub-3750195818284635" />
+        {/* <meta name="google-adsense-account" content="ca-pub-3750195818284635" />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3750195818284635"
           crossOrigin="anonymous"
-        />
+        /> */}
       </head>
 
       <body className={`${dmSans.className} antialiased`}>

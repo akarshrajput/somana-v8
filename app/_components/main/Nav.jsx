@@ -5,8 +5,6 @@ import NavButton from "../buttons/NavButton";
 const Nav = () => {
   return (
     <div className="flex items-center text-xs font-medium">
-      <NavButton href="/">Home</NavButton>
-      <Separator orientation="vertical" />
       <NavButton href="/">Podcast</NavButton>
       <Separator orientation="vertical" />
       <NavButton href="/">Music</NavButton>

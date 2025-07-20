@@ -1,12 +1,12 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
 
 const Logo = () => {
   return (
-    <Link href="/">
-      <div className="font-medium">Somana</div>
+    <Link href="/" className="font-semibold flex items-center gap-1">
+      <img src="/logo.png" className="h-6 brightness-125" />
     </Link>
   );
 };
-
 export default Logo;

@@ -33,7 +33,7 @@ const MusicHorizontalList = () => {
     queryKey: ["music"],
     queryFn: fetchMusic,
   });
-  console.log(data);
+  // console.log(data);
   return (
     <div className="w-full">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 w-full">
@@ -57,7 +57,7 @@ const MusicHorizontalList = () => {
                         className="object-cover rounded w-full h-full"
                       />
                       <div className="absolute inset-0 flex items-center justify-center ">
-                        <PlayCircle size={20} fill color="white" />
+                        <PlayCircle size={20} fill="black" color="white" />
                       </div>
                     </div>
 

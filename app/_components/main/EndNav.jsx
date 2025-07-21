@@ -1,4 +1,3 @@
-import { auth } from "@/app/_lib/auth";
 import { Separator } from "@/components/ui/separator";
 import {
   PenBoxIcon,
@@ -12,12 +11,14 @@ import Link from "next/link";
 import React from "react";
 import SearchInput from "./SearchInput";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/app/_lib/auth";
+import XPBadgeHeader from "./XPBadgeHeader";
 
-const EndNav = async () => {
-  const session = await auth();
+const EndNav = async ({ session }) => {
   return (
     <div className="ml-auto flex gap-2 items-center text-xs font-medium">
       <div className="flex items-center gap-2 mr-2">
+        <XPBadgeHeader />
         <SearchInput />
         <Separator orientation="vertical" />
         {session?.user ? (

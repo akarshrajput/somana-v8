@@ -1,6 +1,8 @@
 import connectMongoDB from "@/app/_lib/mongodb";
 import Podcast from "@/app/_models/podcastModel";
 import APIFeatures from "@/app/_utils/apiFeatures";
+import { updateUserXP } from "@/app/_utils/updateUserXP";
+import { XP_ACTIONS } from "@/app/_utils/xpSystem";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -46,7 +48,17 @@ export async function POST(request) {
   try {
     await connectMongoDB();
     const data = await request.json();
+    if (!data.author) {
+      return NextResponse.json(
+        {
+          statusText: "fail",
+          message: "Author is required to create a Podcast.",
+        },
+        { status: 400 }
+      );
+    }
     const newPodcast = await Podcast.create(data);
+    await updateUserXP(data.author, XP_ACTIONS.PODCAST_UPLOAD);
     return NextResponse.json(
       {
         statusText: "success",

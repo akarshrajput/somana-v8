@@ -94,6 +94,26 @@ const userSchema = new mongoose.Schema(
       default: "Personal",
       enum: ["Personal", "Organization"],
     },
+    xp: {
+      type: Number,
+      default: 0,
+    },
+    level: {
+      type: Number,
+      default: 1,
+    },
+    badge: {
+      type: String,
+      default: "Newbie",
+    },
+    totalPosts: {
+      type: Number,
+      default: 0,
+    },
+    creatorScore: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     toJSON: { virtuals: true },

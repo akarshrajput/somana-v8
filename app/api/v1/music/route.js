@@ -1,6 +1,8 @@
 import connectMongoDB from "@/app/_lib/mongodb";
 import Music from "@/app/_models/musicModel";
 import APIFeatures from "@/app/_utils/apiFeatures";
+import { updateUserXP } from "@/app/_utils/updateUserXP";
+import { XP_ACTIONS } from "@/app/_utils/xpSystem";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -46,7 +48,17 @@ export async function POST(request) {
   try {
     await connectMongoDB();
     const data = await request.json();
+    if (!data.author) {
+      return NextResponse.json(
+        {
+          statusText: "fail",
+          message: "Author is required to create a Music.",
+        },
+        { status: 400 }
+      );
+    }
     const newMusic = await Music.create(data);
+    await updateUserXP(data.author, XP_ACTIONS.MUSIC_UPLOAD);
     return NextResponse.json(
       {
         statusText: "success",

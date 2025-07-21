@@ -5,6 +5,7 @@ import Header from "./_components/main/Header";
 import ReactQueryProvider from "./_components/providers/ReactQueryProvider";
 import Footer from "./_components/main/Footer";
 import Script from "next/script";
+import { UserProvider } from "./_context/UserContext";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -50,19 +51,15 @@ export default function RootLayout({ children }) {
 
       <body className={`${dmSans.className} antialiased`}>
         <ReactQueryProvider>
-          {/* Full-height layout wrapper */}
-          <div className="flex min-h-screen flex-col">
-            {/* Sticky Header */}
-            <div className="sticky top-0 left-0 w-full z-50">
-              <Header />
+          <UserProvider>
+            <div className="flex min-h-screen flex-col">
+              <div className="sticky top-0 left-0 w-full z-50">
+                <Header />
+              </div>
+              <main className="flex-1">{children}</main>
+              <Footer />
             </div>
-
-            {/* Main Content grows to push footer down */}
-            <main className="flex-1">{children}</main>
-
-            {/* Footer sticks to bottom */}
-            <Footer />
-          </div>
+          </UserProvider>
         </ReactQueryProvider>
       </body>
     </html>

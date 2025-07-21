@@ -7,6 +7,7 @@ import TagSlider from "./_components/main/TagSlider";
 import MusicHorizontalList from "./_components/musicComponents/MusicHorizontalList";
 import Quotes from "./_components/other/Quotes";
 import HorizontalList from "./_components/podcastComponents/HorizontalList";
+import TopCreatorsList from "./_components/userComponents/TopCreatorsList";
 
 export default function Home() {
   return (
@@ -50,11 +51,11 @@ export default function Home() {
           <div className="col-span-1">
             <p className="text-center mb-6">
               <span className="border-t-2 font-bold text-sm border-red-600 pt-1">
-                WHO SAID IT
+                🏆 TOP CREATORS
               </span>
             </p>
             <div>
-              <Quotes />
+              <TopCreatorsList />
             </div>
           </div>
         </div>

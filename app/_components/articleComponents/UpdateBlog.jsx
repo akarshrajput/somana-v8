@@ -272,11 +272,7 @@ const UpdateBlog = ({ storyId, supabaseURL, session, hostname }) => {
         <div className="flex flex-col gap-2">
           <Label>Write content</Label>
           <div className="">
-            <TiptapEditor
-              key={content}
-              content={content}
-              onChange={handleContentChange}
-            />
+            <TiptapEditor content={content} onChange={handleContentChange} />
           </div>
         </div>
 

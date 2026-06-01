@@ -34,12 +34,14 @@ const SkeletonCard = () => (
   </div>
 );
 
-// Fetch blogs
 const fetchArticles = async ({ queryKey }) => {
   const [_key, page, topic] = queryKey;
   const limit = 8;
+  const capitalizedTopic = topic
+    ? topic.charAt(0).toUpperCase() + topic.slice(1).toLowerCase()
+    : "";
   const res = await axios.get(
-    `/api/v1/blogs?page=${page}&limit=${limit}&genre=${topic}`
+    `/api/v1/blogs?page=${page}&limit=${limit}&genre=${capitalizedTopic}`
   );
   const blogs = res.data?.data?.blogs || [];
 

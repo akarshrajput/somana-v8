@@ -37,9 +37,8 @@ const SkeletonCard = () => (
 const fetchArticles = async ({ queryKey }) => {
   const [_key, page, q] = queryKey;
   const limit = 8;
-  const res = await axios.get(
-    `/api/v1/blogs?page=${page}&limit=${limit}&heading=${q}`
-  );
+  const url = `/api/v1/blogs?page=${page}&limit=${limit}${q ? `&heading=${encodeURIComponent(q)}` : ""}`;
+  const res = await axios.get(url);
   const blogs = res.data?.data?.blogs || [];
 
   return {

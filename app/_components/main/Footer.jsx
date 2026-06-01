@@ -8,9 +8,9 @@ const footerLinks = [
     title: "Explore",
     links: [
       { name: "Music", href: "/music" },
-      { name: "Blogs", href: "/blogs" },
-      { name: "Stories", href: "/stories" },
-      { name: "Podcasts", href: "/podcasts" },
+      { name: "Blogs", href: "/" },
+      { name: "Stories", href: "/" },
+      { name: "Podcasts", href: "/podcast" },
     ],
   },
   {
@@ -19,7 +19,7 @@ const footerLinks = [
       { name: "About Us", href: "/about" },
       { name: "Contact", href: "/contact" },
       { name: "Careers", href: "/careers" },
-      { name: "Privacy Policy", href: "/privacy" },
+      { name: "Privacy Policy", href: "/privacy-policy" },
     ],
   },
   {
@@ -32,6 +32,14 @@ const footerLinks = [
   },
 ];
 
+const popularTopics = [
+  "Automotive", "Books", "Business", "Culture", "Design", 
+  "Environmental", "Fashion", "Fitness", "Gaming", "Gardening", 
+  "Health", "Humor", "Legal", "Luxury", "Movies", "Notes", 
+  "Photography", "Politics", "Relationships", "Spirituality", 
+  "Story", "Technology", "Travel"
+];
+
 const Footer = () => {
   return (
     <footer className="bg-background text-foreground border-t border-muted py-12 mt-32">
@@ -39,10 +47,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo + Description */}
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">Somana</h1>
+            <div className="text-xl font-semibold tracking-tight">Somana</div>
             <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
-              Somana is your space to explore music, blogs, stories, and
-              podcasts—all in one modern platform powered by creators.
+              Somana is a creative hub for music, blogs, stories, and podcasts—powered by independent creators. 
+              We offer a decentralized space for artists and writers to share their voice, build community, 
+              and explore human expression. Built with modern web technology, we prioritize high-quality user 
+              experience, clean aesthetics, and creator independence. Join us in exploring and shaping the 
+              future of media and digital storytelling.
             </p>
             <div className="flex gap-4 mt-4">
               <Link href="https://instagram.com">
@@ -93,9 +104,31 @@ const Footer = () => {
           ))}
         </div>
 
+        {/* Popular Topics Tag Cloud */}
+        <div className="mt-12 pt-8 border-t border-muted">
+          <h3 className="text-sm font-medium text-foreground mb-4">Popular Topics</h3>
+          <div className="flex flex-wrap gap-2">
+            {popularTopics.map((topic) => (
+              <Link
+                key={topic}
+                href={`/story/topic/${topic.toLowerCase()}`}
+                className="text-[11px] bg-stone-100 hover:bg-neutral-800 hover:text-white dark:bg-neutral-800 dark:hover:bg-stone-100 dark:hover:text-black px-2.5 py-1 rounded-full text-muted-foreground transition duration-200"
+              >
+                {topic}
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Bottom */}
         <div className="mt-12 border-t border-muted pt-6 text-xs text-muted-foreground text-center">
           &copy; {new Date().getFullYear()} Somana. All rights reserved.
+          <p className="mt-4 max-w-3xl mx-auto leading-relaxed text-[11px] opacity-80">
+            Somana is designed and maintained as an open-source platform celebrating independent Indian creators. 
+            All stories, audio podcasts, and musical tracks published on this domain are the intellectual property 
+            of their respective creators. We are dedicated to providing a fast, secure, and accessible channel 
+            for digital storytelling. Connect with us for partnerships, creator queries, or developer collaborations.
+          </p>
         </div>
       </div>
     </footer>

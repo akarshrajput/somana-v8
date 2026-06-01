@@ -28,12 +28,40 @@ const page = () => {
     <div className="flex flex-col items-center my-32">
       <div className="w-full max-w-[1200px] px-4">
         <h1 className="text-3xl font-bold mb-4">Careers at Somana</h1>
-        <p className="text-stone-600 mb-8">
-          We&apos;re building India&apos;s leading creative content platform. Join us.
+        <p className="text-stone-600 mb-8 max-w-2xl">
+          We&apos;re building India&apos;s leading creative content platform. Join us on our mission to redefine 
+          how digital stories, independent music, and audio podcasts are shared, discovered, and celebrated.
         </p>
-        <p className="text-stone-500">
-          No open positions right now — check back soon or email us at careers@somana.in
-        </p>
+        
+        <div className="grid md:grid-cols-2 gap-8 mb-8 max-w-4xl">
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Our Culture</h2>
+            <p className="text-stone-500 text-sm leading-relaxed">
+              Somana is a remote-first, passion-driven initiative. We value collaborative growth, original thinking, 
+              and clean engineering. We encourage team members to explore cross-functional disciplines, blending 
+              creative arts with modern software development.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Who We Look For</h2>
+            <p className="text-stone-500 text-sm leading-relaxed">
+              We look for self-motivated creators, designers, front-end engineers, and community managers who are 
+              passionate about independent media. If you believe in empowering creators and building algorithmic-free 
+              user spaces, you will fit right in.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-stone-50 p-6 rounded-xl border border-stone-200 max-w-2xl">
+          <h2 className="text-lg font-semibold mb-2">Open Applications</h2>
+          <p className="text-stone-500 text-sm leading-relaxed mb-4">
+            While we do not have specific open positions listed right now, we are always eager to meet talented developers, 
+            content editors, and digital artists who want to leave a mark.
+          </p>
+          <p className="text-stone-600 text-sm font-medium">
+            Send your resume, portfolio, or a brief intro to: <a href="mailto:careers@somana.in" className="text-blue-600 hover:underline">careers@somana.in</a>
+          </p>
+        </div>
       </div>
     </div>
   );

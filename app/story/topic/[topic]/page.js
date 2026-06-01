@@ -58,7 +58,15 @@ const page = async ({ params }) => {
       />
       <div className="flex flex-col items-center my-4">
         <div className="w-full max-w-[1200px] px-2">
-          <h1 className="sr-only">{topicName} Stories on Somana</h1>
+          <div className="mb-8 border-b border-stone-200 pb-6">
+            <h1 className="text-3xl font-bold tracking-tight text-stone-900">{topicName} Stories</h1>
+            <p className="mt-2 text-stone-600 text-sm leading-relaxed max-w-3xl">
+              Welcome to the {topicName} archive on Somana. This section gathers a curated selection of articles, 
+              creative essays, personal reflections, and informative logs written by independent creators from India 
+              and around the world. Dive in to explore unique angles, fresh perspectives, and deep insights 
+              on the subject of {topicName.toLowerCase()}, and discover talented new writers who shape the community.
+            </p>
+          </div>
           <ArticleGrid2 topic={topic} />
         </div>
       </div>

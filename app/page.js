@@ -24,6 +24,7 @@ export const metadata = {
     description:
       "Read the best independent stories, listen to podcasts, and discover music by creators across India.",
     url: BASE_URL,
+    siteName: "Somana",
     type: "website",
     images: [
       {
@@ -74,10 +75,11 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageJsonLd) }}
       />
       <div className="flex flex-col items-center my-4">
-      <div className="w-full max-w-[1200px] px-2">
-        <div className="pb-12">
-          <TagSlider />
-        </div>
+        <h1 className="sr-only">Somana</h1>
+        <div className="w-full max-w-[1200px] px-2">
+          <div className="pb-12">
+            <TagSlider />
+          </div>
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-1">
             <HeaderButton>TODAY PICK</HeaderButton>

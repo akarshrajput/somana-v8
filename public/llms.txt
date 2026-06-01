@@ -1,0 +1,21 @@
+# Somana
+
+> Somana is a modern creative content platform designed for discovering and sharing stories, podcasts, and music by independent creators across World.
+
+## Platform Overview
+
+Somana is built as a decentralized space celebrating human expression. It provides independent writers, audio producers, and musicians with a clean, high-performance portal to share their art directly with their audience, completely free from cold recommendation algorithms. Creators earn Experience Points (XP) through their contributions, creating a community-focused leaderboard.
+
+## Core Pages & Resources
+
+- [/](https://somana.in): Homepage featuring picks of the day, trending articles, latest podcasts, and community showcases.
+- [/about](https://somana.in/about): About the vision of Somana, its independent development, and its creator Akarsh Rajput.
+- [/contact](https://somana.in/contact): Contact page for technical support, collaborations, and partnership inquiries.
+- [/careers](https://somana.in/careers): Information on company culture, Remote-first values, and career opportunities.
+- [/contribute](https://somana.in/contribute): Information and requirements on how to become a verified creator on the platform.
+- [/creators](https://somana.in/creators): Lead leaderboard displaying top creators ranked by their XP contributions.
+- [/events](https://somana.in/events): Community events including creator meetups, live acoustic sets, and storytelling nights.
+- [/music](https://somana.in/music): Hub for streaming original tracks, songs, instrumentals, and audio experiments.
+- [/podcast](https://somana.in/podcast): Streaming platform for independent podcasts, conversations, and storytelling logs.
+- [/search](https://somana.in/search): In-depth index search for stories, tracks, podcasts, and creators.
+- [/privacy-policy](https://somana.in/privacy-policy): Standard privacy documentation and terms of service.

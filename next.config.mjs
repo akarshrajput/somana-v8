@@ -18,6 +18,31 @@ const nextConfig = {
     unoptimized: false,
   },
 
+  async redirects() {
+    return [
+      {
+        source: "/privacy",
+        destination: "/privacy-policy",
+        permanent: true,
+      },
+      {
+        source: "/podcasts",
+        destination: "/podcast",
+        permanent: true,
+      },
+      {
+        source: "/stories",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/blogs",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     return [
       {

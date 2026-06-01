@@ -71,6 +71,25 @@ const Contact = () => {
               </p>
             </div>
           </div>
+
+          <div className="pt-6 border-t border-stone-200">
+            <h2 className="text-lg font-semibold mb-3">Guidelines & Support</h2>
+            <div className="space-y-3 text-stone-500 text-xs leading-relaxed">
+              <p>
+                <strong>For Creators:</strong> If you are interested in becoming a verified writer, musician, or podcaster, 
+                please register an account first, fill out your profile details (photo and bio), and write to us with 
+                your portfolio links.
+              </p>
+              <p>
+                <strong>For Support:</strong> Encountered a bug or an issue uploading your media? Please mention the browser, 
+                device, and operating system you are using, along with any error messages you see, so our team can debug.
+              </p>
+              <p>
+                <strong>For Partners:</strong> For brand collaborations, media inquiries, or technical integration ideas, 
+                please select a clear subject line. We aim to respond to all inquiries within 48 business hours.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Contact Form */}

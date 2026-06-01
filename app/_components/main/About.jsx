@@ -34,7 +34,7 @@ const About = () => {
 
         <div className="flex justify-center">
           <Image
-            src="/images/creator-avatar.jpg" // replace with your image path
+            src="/images/creator-avatar.png"
             alt="Akarsh Rajput"
             width={250}
             height={250}

@@ -1,4 +1,5 @@
 import React from "react";
+import TopCreatorsList from "@/app/_components/userComponents/TopCreatorsList";
 
 const BASE_URL = "https://somana.in";
 
@@ -26,11 +27,16 @@ export const metadata = {
 const page = () => {
   return (
     <div className="flex flex-col items-center my-32">
-      <div className="w-full max-w-[1200px] px-4">
+      <div className="w-full max-w-[600px] px-4">
         <h1 className="text-3xl font-bold mb-4">Top Creators</h1>
-        <p className="text-stone-600">
-          Discover India&apos;s most talented independent creators on Somana.
+        <p className="text-stone-600 mb-6 text-sm leading-relaxed">
+          Welcome to the Somana Creator Hall of Fame. Here, we highlight our most active independent voices 
+          who share their passion, knowledge, and talent with the community. Creators on Somana earn 
+          Experience Points (XP) by contributing high-quality stories, uploading podcasts, and publishing original music. 
+          The leaderboard below features our top-ranking creators sorted by their activity and contributions. 
+          Join our community, share your work, and see your name on the leaderboard!
         </p>
+        <TopCreatorsList />
       </div>
     </div>
   );

@@ -13,12 +13,17 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
+    password: {
+      type: String,
+      select: false,
+    },
     userName: {
       type: String,
       unique: true,
     },
     photo: {
       type: String,
+      default: "https://avatar.iran.liara.run/public",
     },
     role: {
       type: String,
@@ -125,6 +130,9 @@ const userSchema = new mongoose.Schema(
 userSchema.pre("save", function (next) {
   if (!this.userName && this.email) {
     this.userName = this.email.split("@")[0].replace(/[^a-zA-Z0-9]/g, "_");
+  }
+  if (!this.photo) {
+    this.photo = `https://avatar.iran.liara.run/public/username?username=${encodeURIComponent(this.name || "user")}`;
   }
   next();
 });

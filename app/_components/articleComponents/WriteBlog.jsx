@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import supabase from "@/app/_lib/supabase";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import {
   Select,
   SelectContent,
@@ -128,42 +129,37 @@ const WriteBlog = ({ supabaseURL, session, hostname }) => {
 
   const router = useRouter();
 
-  const uploadToS3 = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
+  const uploadToSupabase = async (file) => {
+    const imageName = `${Math.random()}-${Date.now()}-${file.name}`;
+    const { data, error } = await supabase.storage
+      .from("blog-featured-images")
+      .upload(imageName, file);
 
-    const res = await fetch("/api/v1/blogs/image-upload", {
-      method: "POST",
-      body: formData,
-    });
+    if (error) throw new Error(error.message || "Failed to upload image");
 
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(data.error || "Failed to upload image");
-
-    return data.url; // public S3 image URL
+    return `${supabaseURL}/storage/v1/object/public/blog-featured-images/${imageName}`;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!heading || !description || !tags || !genre) {
-      // toast({
-      //   description: "Please fill all fields",
-      //   status: "error",
-      //   duration: 2000,
-      //   isClosable: true,
-      // });
+      toast.error("Please fill in all required fields (Heading, Description, Tags, Genre)");
+      return;
+    }
+
+    if (heading.length < 10) {
+      toast.error("Heading must be at least 10 characters long");
+      return;
+    }
+
+    if (description.length < 20) {
+      toast.error("Description must be at least 20 characters long");
       return;
     }
 
     if (featuredImage && featuredImage.type.split("/")[0] !== "image") {
-      // toast({
-      //   description: "Only image files are allowed",
-      //   status: "error",
-      //   duration: 2000,
-      //   isClosable: true,
-      // });
+      toast.error("Only image files are allowed for the description photo");
       return;
     }
 
@@ -174,11 +170,11 @@ const WriteBlog = ({ supabaseURL, session, hostname }) => {
       let collectedImageUrls = [];
 
       if (featuredImage) {
-        imagePath = await uploadToS3(featuredImage);
+        imagePath = await uploadToSupabase(featuredImage);
       }
 
       for (const image of collectedImages) {
-        const url = await uploadToS3(image);
+        const url = await uploadToSupabase(image);
         collectedImageUrls.push(url);
       }
 
@@ -202,13 +198,7 @@ const WriteBlog = ({ supabaseURL, session, hostname }) => {
       });
 
       const slug = response?.data?.data?.newBlog?.slug;
-      // toast({
-      //   title: "Success",
-      //   description: "Story posted Successfully!",
-      //   status: "success",
-      //   duration: 9000,
-      //   isClosable: true,
-      // });
+      toast.success("Story posted successfully!");
       router.push(`/story/${slug}`);
 
       // Reset form fields
@@ -220,13 +210,8 @@ const WriteBlog = ({ supabaseURL, session, hostname }) => {
       setTags("");
       setFileLinks("");
     } catch (error) {
-      // toast({
-      //   title: "Error",
-      //   description: "Error posting story!",
-      //   status: "error",
-      //   duration: 5000,
-      //   isClosable: true,
-      // });
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Error posting story!";
+      toast.error(errorMessage);
       console.error("Error posting Blog:", error);
     } finally {
       setIsLoading(false);

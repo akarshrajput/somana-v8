@@ -3,6 +3,13 @@ import UploadMusic from "@/app/_components/musicComponents/UploadMusic";
 import { auth } from "@/app/_lib/auth";
 import React from "react";
 
+export const metadata = {
+  title: "Upload Music — Somana",
+  description: "Upload original music to Somana.",
+  robots: { index: false, follow: false },
+};
+
+
 const page = async () => {
   const session = await auth();
   const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;

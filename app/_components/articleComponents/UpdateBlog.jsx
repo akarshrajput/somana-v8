@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import supabase from "@/app/_lib/supabase";
 
 import {
   Select,
@@ -83,6 +85,8 @@ const UpdateBlog = ({ storyId, supabaseURL, session, hostname }) => {
   const [tags, setTags] = useState("");
   const [fileLinks, setFileLinks] = useState("");
   const [genre, setGenre] = useState("Blog");
+  const [featuredImage, setFeaturedImage] = useState(null);
+  const [currentFeaturedImage, setCurrentFeaturedImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
@@ -100,6 +104,7 @@ const UpdateBlog = ({ storyId, supabaseURL, session, hostname }) => {
         setTags(data.tags);
         setGenre(data.genre);
         setUserId(data.author._id);
+        setCurrentFeaturedImage(data.featuredImage);
       } catch (error) {
         console.error("Error fetching blog data:", error);
       }
@@ -126,16 +131,37 @@ const UpdateBlog = ({ storyId, supabaseURL, session, hostname }) => {
     );
   }
 
+  const uploadToSupabase = async (file) => {
+    const imageName = `${Math.random()}-${Date.now()}-${file.name}`;
+    const { data, error } = await supabase.storage
+      .from("blog-featured-images")
+      .upload(imageName, file);
+
+    if (error) throw new Error(error.message || "Failed to upload image");
+
+    return `${supabaseURL}/storage/v1/object/public/blog-featured-images/${imageName}`;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!heading || !description || !tags || !genre) {
-      // toast({
-      //   description: "Please fill all fields",
-      //   status: "error",
-      //   duration: 2000,
-      //   isClosable: true,
-      // });
+      toast.error("Please fill in all required fields (Heading, Description, Tags, Genre)");
+      return;
+    }
+
+    if (heading.length < 10) {
+      toast.error("Heading must be at least 10 characters long");
+      return;
+    }
+
+    if (description.length < 20) {
+      toast.error("Description must be at least 20 characters long");
+      return;
+    }
+
+    if (featuredImage && featuredImage.type.split("/")[0] !== "image") {
+      toast.error("Only image files are allowed for the description photo");
       return;
     }
 
@@ -152,11 +178,17 @@ const UpdateBlog = ({ storyId, supabaseURL, session, hostname }) => {
         genre,
       };
 
+      if (featuredImage) {
+        const newImagePath = await uploadToSupabase(featuredImage);
+        blogData.featuredImage = newImagePath;
+      }
+
       const response = await axios.patch(`/api/v1/blogs/${storyId}`, blogData, {
         headers: { "Content-Type": "application/json" },
       });
 
       const slug = response?.data?.data?.updatedBlog?.slug;
+      toast.success("Story updated successfully!");
       router.push(`/story/${slug}`);
 
       // Reset form fields
@@ -165,14 +197,10 @@ const UpdateBlog = ({ storyId, supabaseURL, session, hostname }) => {
       setContent("");
       setTags("");
       setFileLinks("");
+      setFeaturedImage(null);
     } catch (error) {
-      // toast({
-      //   title: "Error",
-      //   description: "Error posting story!",
-      //   status: "error",
-      //   duration: 5000,
-      //   isClosable: true,
-      // });
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || "Error updating story!";
+      toast.error(errorMessage);
       console.error("Error posting Blog:", error);
     } finally {
       setIsLoading(false);
@@ -232,6 +260,23 @@ const UpdateBlog = ({ storyId, supabaseURL, session, hostname }) => {
         </div>
 
         <div className="flex flex-wrap items-center gap-4 py-1">
+          <div className="flex flex-col gap-2">
+            <Label>Description photo</Label>
+            <div className="flex items-center gap-2">
+              {currentFeaturedImage && (
+                <img
+                  src={currentFeaturedImage}
+                  alt="Current Description"
+                  className="w-10 h-10 object-cover rounded border border-stone-200"
+                />
+              )}
+              <Input
+                type="file"
+                onChange={(e) => setFeaturedImage(e.target.files[0])}
+                className="w-fit"
+              />
+            </div>
+          </div>
           <div className="flex flex-col gap-2">
             <Label>Tags</Label>
             <Input

@@ -8,10 +8,72 @@ import MusicHorizontalList from "./_components/musicComponents/MusicHorizontalLi
 import Quotes from "./_components/other/Quotes";
 import HorizontalList from "./_components/podcastComponents/HorizontalList";
 import TopCreatorsList from "./_components/userComponents/TopCreatorsList";
+import Script from "next/script";
+
+const BASE_URL = "https://somana.in";
+
+export const metadata = {
+  title: "Somana — Discover Stories, Music & Podcasts",
+  description:
+    "Read the best independent stories, listen to podcasts, and discover music by creators across India. Somana is where creativity meets community.",
+  alternates: {
+    canonical: BASE_URL,
+  },
+  openGraph: {
+    title: "Somana — Discover Stories, Music & Podcasts",
+    description:
+      "Read the best independent stories, listen to podcasts, and discover music by creators across India.",
+    url: BASE_URL,
+    type: "website",
+    images: [
+      {
+        url: `${BASE_URL}/logo.png`,
+        width: 1200,
+        height: 630,
+        alt: "Somana — Stories, Music & Podcasts",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Somana — Discover Stories, Music & Podcasts",
+    description:
+      "Read the best independent stories, listen to podcasts, and discover music by creators across India.",
+    images: [`${BASE_URL}/logo.png`],
+  },
+};
+
+const homePageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${BASE_URL}/#webpage`,
+  url: BASE_URL,
+  name: "Somana — Discover Stories, Music & Podcasts",
+  description:
+    "Read the best independent stories, listen to podcasts, and discover music by creators across India.",
+  isPartOf: { "@id": `${BASE_URL}/#website` },
+  breadcrumb: {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: BASE_URL,
+      },
+    ],
+  },
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center my-4">
+    <>
+      <Script
+        id="homepage-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageJsonLd) }}
+      />
+      <div className="flex flex-col items-center my-4">
       <div className="w-full max-w-[1200px] px-2">
         <div className="pb-12">
           <TagSlider />
@@ -83,5 +145,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </>
   );
 }

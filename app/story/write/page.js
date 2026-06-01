@@ -3,6 +3,13 @@ import Warning from "@/app/_components/main/Warning";
 import { auth } from "@/app/_lib/auth";
 import React from "react";
 
+export const metadata = {
+  title: "Write a Story — Somana",
+  description: "Create and publish a new story on Somana.",
+  robots: { index: false, follow: false },
+};
+
+
 const page = async () => {
   const session = await auth();
   const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;

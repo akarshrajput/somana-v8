@@ -65,7 +65,33 @@ const CurrentUserProfile = ({ session }) => {
   });
 
   useEffect(() => {
-    if (user) setUserProfile(user);
+    if (user) {
+      const sanitized = {};
+      const fields = [
+        "name", "email", "photo", "mobileNumber", "bio", "status", "gender",
+        "city", "state", "country", "occupation", "qualification", "studiedFrom",
+        "nickname", "maritalStatus", "company", "accountType"
+      ];
+
+      fields.forEach(field => {
+        sanitized[field] = user[field] ?? "";
+      });
+
+      sanitized.subscription = !!user.subscription;
+      sanitized.userName = user.userName ?? "";
+
+      if (user.dob) {
+        try {
+          sanitized.dob = new Date(user.dob).toISOString().split("T")[0];
+        } catch (e) {
+          sanitized.dob = "";
+        }
+      } else {
+        sanitized.dob = "";
+      }
+
+      setUserProfile(sanitized);
+    }
   }, [user]);
 
   const handleInputChange = (e) => {

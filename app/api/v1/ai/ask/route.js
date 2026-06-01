@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
-
-if (!GROQ_API_KEY) {
-  throw new Error("Please set the GROQ_API_KEY environment variable.");
-}
-
 export async function POST(request) {
+  const GROQ_API_KEY = process.env.GROQ_API_KEY;
+
+  if (!GROQ_API_KEY) {
+    return NextResponse.json(
+      { statusText: "error", message: "Please set the GROQ_API_KEY environment variable." },
+      { status: 500 }
+    );
+  }
+
   try {
     const { question } = await request.json();
 

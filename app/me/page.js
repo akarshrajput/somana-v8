@@ -2,6 +2,13 @@ import React from "react";
 import { auth } from "../_lib/auth";
 import CurrentUserProfile from "../_components/userComponents/CurrentUserProfile";
 
+export const metadata = {
+  title: "My Profile — Somana",
+  description: "Manage your Somana profile, bio, and account settings.",
+  robots: { index: false, follow: false },
+};
+
+
 const page = async () => {
   const session = await auth();
   return (

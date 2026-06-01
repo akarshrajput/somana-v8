@@ -12,6 +12,17 @@ export async function getUser(email) {
   }
 }
 
+export async function getUserWithPassword(email) {
+  try {
+    await connectMongoDB();
+    const user = await User.findOne({ email: email }).select("+password");
+    return user ? user : null;
+  } catch (err) {
+    console.error("Error getting user with password:", err);
+    throw new Error("Error getting user");
+  }
+}
+
 export async function createUser(data) {
   try {
     await connectMongoDB();

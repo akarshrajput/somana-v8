@@ -1,6 +1,12 @@
 import Link from "next/link";
 import React from "react";
 
+export const metadata = {
+  title: "Upload Content — Somana",
+  description: "Upload your stories, podcasts, and music to Somana.",
+  robots: { index: false, follow: false },
+};
+
 const page = () => {
   return (
     <div className="flex flex-col items-center my-12">
@@ -31,3 +37,4 @@ const page = () => {
 };
 
 export default page;
+

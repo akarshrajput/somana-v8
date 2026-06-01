@@ -1,6 +1,13 @@
 import UpdateBlog from "@/app/_components/articleComponents/UpdateBlog";
 import { auth } from "@/app/_lib/auth";
 
+export const metadata = {
+  title: "Edit Story — Somana",
+  description: "Edit your story on Somana.",
+  robots: { index: false, follow: false },
+};
+
+
 const Page = async ({ params }) => {
   const session = await auth();
   const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;

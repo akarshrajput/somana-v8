@@ -147,11 +147,12 @@ export default function Home() {
         </div>
 
         <section className="mt-16 pt-8 border-t border-stone-200">
-          <h2 className="text-xl font-semibold text-stone-800 mb-2">Discover Stories, Music & Podcasts</h2>
+          <h2 className="text-xl font-semibold text-stone-800 mb-2">Discover Stories, Music, Podcasts & Notes</h2>
           <p className="mb-6 text-stone-600 max-w-3xl leading-relaxed">
             Somana is India&apos;s independent creative content platform where writers, musicians, and podcasters share 
-            their original work. Browse curated stories from emerging voices, stream independently produced music tracks, 
-            and listen to thought-provoking podcasts — all in one place, free from algorithmic feeds.
+            their original work. Browse curated stories from emerging voices, access comprehensive college notes and 
+            engineering study materials, stream independently produced music tracks, and listen to thought-provoking 
+            podcasts — all in one place, free from algorithmic feeds.
           </p>
           <div className="grid md:grid-cols-3 gap-6">
             <div>

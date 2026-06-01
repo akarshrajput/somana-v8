@@ -2,7 +2,7 @@ import FullMusic from "@/app/_components/musicComponents/FullMusic";
 import Script from "next/script";
 import React from "react";
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 async function fetchMusicData(id) {
   try {

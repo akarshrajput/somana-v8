@@ -14,7 +14,7 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 const OG_IMAGE = `${BASE_URL}/logo.png`;
 
 export const metadata = {

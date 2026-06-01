@@ -33,11 +33,15 @@ const footerLinks = [
 ];
 
 const popularTopics = [
-  "Automotive", "Books", "Business", "Culture", "Design", 
-  "Environmental", "Fashion", "Fitness", "Gaming", "Gardening", 
-  "Health", "Humor", "Legal", "Luxury", "Movies", "Notes", 
-  "Photography", "Politics", "Relationships", "Spirituality", 
-  "Story", "Technology", "Travel"
+  "Notes", "Blog", "Automotive", "Beauty", "Books", "Business",
+  "Career", "Cryptocurrency", "Culture", "Crafts", "Design", "Education",
+  "Entertainment", "Environmental", "Fashion", "Finance", "Fitness", "Food",
+  "Gaming", "Gardening", "Health", "History", "Home", "Humor", "Interests",
+  "Investing", "Legal", "Lifestyle", "Luxury", "Marketing", "Movies", "Music",
+  "News", "Nonprofit", "Parenting", "Pets", "Photography", "Politics", "Estate",
+  "Relationships", "Science", "Shopping", "Social", "Space", "Spirituality",
+  "Sports", "Startups", "Story", "Technology", "Tips", "Travel", "Volunteer",
+  "Writing"
 ];
 
 const Footer = () => {

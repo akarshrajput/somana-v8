@@ -1,9 +1,8 @@
 import ArticleGrid2 from "@/app/_components/articleComponents/ArticleGrid2";
 import Script from "next/script";
 import React from "react";
-import { permanentRedirect } from "next/navigation";
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 export async function generateMetadata({ params }) {
   const { topic } = await params;
@@ -32,9 +31,6 @@ export async function generateMetadata({ params }) {
 
 const page = async ({ params }) => {
   const { topic } = await params;
-  if (topic !== topic.toLowerCase()) {
-    permanentRedirect(`/story/topic/${topic.toLowerCase()}`);
-  }
   const topicName = topic.charAt(0).toUpperCase() + topic.slice(1).toLowerCase();
   const lowercaseTopic = topic.toLowerCase();
 
@@ -66,17 +62,60 @@ const page = async ({ params }) => {
         <div className="w-full max-w-[1200px] px-2">
           <div className="mb-8 pb-2">
             <h1 className="text-3xl font-bold tracking-tight text-stone-900">{topicName}</h1>
+            <p className="mt-2 text-stone-600 leading-relaxed max-w-3xl">
+              Explore the best {topicName.toLowerCase()} stories written by independent creators on Somana. 
+              This collection features articles, personal essays, opinion pieces, and in-depth narratives 
+              covering every aspect of {topicName.toLowerCase()} — from beginner guides and expert insights 
+              to personal experiences and thought-provoking commentary.
+            </p>
           </div>
           <ArticleGrid2 topic={topic} />
 
-          <div className="mt-12 pt-6">
+          <section className="mt-12 pt-6 border-t border-stone-100">
+            <h2 className="text-lg font-semibold text-stone-800 mb-3">About {topicName} on Somana</h2>
             <p className="text-stone-600 text-sm leading-relaxed max-w-4xl">
               Welcome to the {topicName} archive on Somana. This section gathers a curated selection of articles,
               creative essays, personal reflections, and informative logs written by independent creators from India
               and around the world. Dive in to explore unique angles, fresh perspectives, and deep insights
               on the subject of {topicName.toLowerCase()}, and discover talented new writers who shape the community.
             </p>
-          </div>
+            <p className="text-stone-600 text-sm leading-relaxed max-w-4xl mt-3">
+              Whether you are looking for practical advice, creative inspiration, or simply want to read 
+              something thoughtful about {topicName.toLowerCase()}, you will find it here. Our creators bring diverse 
+              backgrounds and writing styles, ensuring that every piece offers a unique take. New stories are 
+              published regularly, so check back often to stay updated with the latest {topicName.toLowerCase()} content 
+              on Somana.
+            </p>
+          </section>
+
+          <section className="mt-8 pt-6 border-t border-stone-100">
+            <h2 className="text-lg font-semibold text-stone-800 mb-4">Frequently Asked Questions</h2>
+            <div className="space-y-4 max-w-4xl">
+              <div>
+                <h3 className="text-sm font-medium text-stone-700">What kind of {topicName.toLowerCase()} content can I find on Somana?</h3>
+                <p className="text-stone-500 text-sm leading-relaxed mt-1">
+                  You can find blog posts, personal essays, how-to guides, opinion articles, listicles, and long-form 
+                  narratives related to {topicName.toLowerCase()}. All content is written by independent creators who are 
+                  passionate about the subject.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-stone-700">How can I contribute a {topicName.toLowerCase()} story?</h3>
+                <p className="text-stone-500 text-sm leading-relaxed mt-1">
+                  Create a free account on Somana, navigate to the story editor, write your piece, tag it 
+                  with &ldquo;{topicName}&rdquo;, and publish. Your story will appear in this collection and be discoverable 
+                  by readers interested in {topicName.toLowerCase()} content.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-stone-700">Are {topicName.toLowerCase()} stories on Somana free to read?</h3>
+                <p className="text-stone-500 text-sm leading-relaxed mt-1">
+                  Yes, all stories on Somana are completely free to read. There are no paywalls or subscription 
+                  requirements. We believe in open access to quality independent content for everyone.
+                </p>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </>

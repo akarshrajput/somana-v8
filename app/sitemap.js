@@ -1,4 +1,4 @@
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 // Static routes
 const staticRoutes = [
@@ -16,9 +16,15 @@ const staticRoutes = [
 ];
 
 const storyTopics = [
-  "Technology", "Science", "Culture", "Travel", "Food", "Lifestyle",
-  "Business", "Health", "Entertainment", "Sports", "Art", "Photography",
-  "History", "Politics", "Education", "Notes",
+  "Notes", "Blog", "Automotive", "Beauty", "Books", "Business",
+  "Career", "Cryptocurrency", "Culture", "Crafts", "Design", "Education",
+  "Entertainment", "Environmental", "Fashion", "Finance", "Fitness", "Food",
+  "Gaming", "Gardening", "Health", "History", "Home", "Humor", "Interests",
+  "Investing", "Legal", "Lifestyle", "Luxury", "Marketing", "Movies", "Music",
+  "News", "Nonprofit", "Parenting", "Pets", "Photography", "Politics", "Estate",
+  "Relationships", "Science", "Shopping", "Social", "Space", "Spirituality",
+  "Sports", "Startups", "Story", "Technology", "Tips", "Travel", "Volunteer",
+  "Writing"
 ];
 
 async function fetchAllBlogSlugs() {

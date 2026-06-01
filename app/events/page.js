@@ -1,6 +1,6 @@
 import React from "react";
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 export const metadata = {
   title: "Events — Somana",
@@ -62,6 +62,22 @@ const page = () => {
             </p>
           </div>
         </div>
+
+        <section className="mt-12 pt-6 border-t border-stone-200 max-w-4xl">
+          <h2 className="text-lg font-semibold text-stone-800 mb-3">About Somana Events</h2>
+          <p className="text-stone-500 text-sm leading-relaxed">
+            Somana events are designed to bring together India&apos;s growing community of independent content creators. 
+            Whether you are a writer wanting to share your work with an audience, a podcaster seeking collaboration 
+            opportunities, or a musician looking to perform live, our events provide a welcoming and supportive environment. 
+            Events are free to attend and open to all registered members of the Somana platform.
+          </p>
+          <p className="text-stone-500 text-sm leading-relaxed mt-3">
+            We host a mix of virtual sessions that anyone can join from anywhere, and occasional in-person meetups 
+            in select Indian cities. Stay tuned for announcements about upcoming events by following our social media 
+            channels and checking this page regularly. If you would like to host or co-organize an event with Somana, 
+            reach out to us through our contact page — we love partnering with passionate community members.
+          </p>
+        </section>
       </div>
     </div>
   );

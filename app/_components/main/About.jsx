@@ -84,6 +84,45 @@ const About = () => {
           Contact Me
         </Link>
       </section>
+
+      <section className="mt-20">
+        <h2 className="text-2xl font-semibold mb-6 text-center">Our Mission & Values</h2>
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div>
+            <h3 className="text-lg font-medium mb-2">Creator-First Approach</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Everything we build at Somana starts with the creator in mind. From our distraction-free writing editor 
+              to our clean audio upload flow, every feature is designed to help independent voices reach their audience 
+              without the noise of traditional social media platforms. We believe that quality content deserves quality tools.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-2">Open & Accessible</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Somana is free to use for both creators and readers. There are no paywalls, no premium tiers, and no 
+              hidden fees. We want to democratize content publishing in India by making professional-grade tools 
+              available to everyone, whether you are a college student writing your first blog or an experienced 
+              journalist sharing investigative reports.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-2">Quality Over Quantity</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              We do not chase viral content or engagement metrics. Somana is built around the idea that thoughtful, 
+              well-crafted content creates lasting value. Our platform encourages long-form storytelling, detailed 
+              analysis, and creative expression over clickbait headlines and shallow posts.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-2">Built with Modern Technology</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Somana runs on a modern tech stack including Next.js for server-rendered performance, MongoDB for 
+              flexible data storage, and a responsive design that works beautifully on desktop, tablet, and mobile 
+              devices. We continuously improve the platform&apos;s speed, reliability, and user experience.
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 };

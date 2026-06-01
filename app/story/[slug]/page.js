@@ -54,7 +54,7 @@ const fetchBlogData = async (slug) => {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const blog = await fetchBlogData(slug);
-  const BASE_URL = "https://somana.in";
+  const BASE_URL = "https://www.somana.in";
 
   if (!blog) {
     return {
@@ -124,7 +124,7 @@ const Page = async ({ params }) => {
     );
   }
 
-  const BASE_URL = "https://somana.in";
+  const BASE_URL = "https://www.somana.in";
   const modifiedContent = article.content?.replace(/target="_blank"/g, "");
 
   const articleJsonLd = {

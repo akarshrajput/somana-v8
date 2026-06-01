@@ -120,7 +120,7 @@ export default function TagSlider() {
         className="flex gap-2 overflow-x-auto scroll-smooth no-scrollbar"
       >
         {tags.map((tag) => (
-          <Link key={tag} href={`/story/topic/${tag}`}>
+          <Link key={tag} href={`/story/topic/${tag.toLowerCase()}`}>
             <Button
               variant="outline"
               size="sm"

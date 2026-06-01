@@ -8,7 +8,6 @@ export default function robots() {
           "/api/",
           "/me",
           "/me/",
-          "/login",
           "/story/write",
           "/story/edit/",
           "/upload",
@@ -23,7 +22,6 @@ export default function robots() {
         disallow: [
           "/api/",
           "/me",
-          "/login",
           "/story/write",
           "/story/edit/",
           "/upload",
@@ -32,7 +30,7 @@ export default function robots() {
         ],
       },
     ],
-    sitemap: "https://somana.in/sitemap.xml",
-    host: "https://somana.in",
+    sitemap: "https://www.somana.in/sitemap.xml",
+    host: "https://www.somana.in",
   };
 }

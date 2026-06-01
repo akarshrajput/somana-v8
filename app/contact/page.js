@@ -2,7 +2,7 @@ import React from "react";
 import Contact from "../_components/main/Contact";
 import Script from "next/script";
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 export const metadata = {
   title: "Contact Somana",

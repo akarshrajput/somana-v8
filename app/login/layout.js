@@ -7,7 +7,7 @@ export const metadata = {
     title: "Sign In — Somana",
     description: "Join Somana — India's creative content platform.",
     type: "website",
-    images: [{ url: "https://somana.in/logo.png", width: 1200, height: 630 }],
+    images: [{ url: "https://www.somana.in/logo.png", width: 1200, height: 630 }],
   },
 };
 

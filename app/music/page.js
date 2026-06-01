@@ -1,7 +1,7 @@
 import React from "react";
 import MusicHorizontalList from "@/app/_components/musicComponents/MusicHorizontalList";
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 export const metadata = {
   title: "Music — Somana",

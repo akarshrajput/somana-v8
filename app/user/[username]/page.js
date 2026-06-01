@@ -3,7 +3,7 @@ import UserProfile from "@/app/_components/userComponents/UserProfile";
 import Script from "next/script";
 import axios from "axios";
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 const fetchUserProfile = async (username) => {
   let baseUrl = process.env.HOSTNAME || "http://localhost:3000";

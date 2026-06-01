@@ -1,6 +1,6 @@
 import React from "react";
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 export const metadata = {
   title: "Contribute to Somana",
@@ -67,6 +67,22 @@ const page = () => {
             Contact us at: <a href="mailto:contact@somana.in" className="text-blue-600 hover:underline">contact@somana.in</a>
           </p>
         </div>
+
+        <section className="mt-12 pt-6 border-t border-stone-200 max-w-4xl">
+          <h2 className="text-lg font-semibold text-stone-800 mb-3">Why Contribute to Somana?</h2>
+          <p className="text-stone-500 text-sm leading-relaxed">
+            Somana is built for creators who want a clean, distraction-free platform to share their work. Unlike 
+            mainstream social media, your content on Somana is presented without algorithmic manipulation — readers 
+            discover stories, podcasts, and music based on genuine interest, not engagement tricks. Your work gets 
+            the attention and respect it deserves.
+          </p>
+          <p className="text-stone-500 text-sm leading-relaxed mt-3">
+            Every piece you publish on Somana gets its own dedicated page with proper SEO metadata, making it 
+            discoverable through search engines. You retain full ownership of your content and can build a 
+            growing audience of readers who follow your creative journey. Whether you write once a month or 
+            daily, Somana adapts to your pace and supports your growth as an independent creator.
+          </p>
+        </section>
       </div>
     </div>
   );

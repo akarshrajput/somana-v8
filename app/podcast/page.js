@@ -1,7 +1,7 @@
 import React from "react";
 import HorizontalList from "@/app/_components/podcastComponents/HorizontalList";
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 export const metadata = {
   title: "Podcasts — Somana",
@@ -36,6 +36,22 @@ const page = () => {
           Click on any podcast to launch the built-in player.
         </p>
         <HorizontalList />
+
+        <section className="mt-12 pt-6 border-t border-stone-200 max-w-4xl">
+          <h2 className="text-lg font-semibold text-stone-800 mb-3">Discover Podcasts on Somana</h2>
+          <p className="text-stone-500 text-sm leading-relaxed">
+            Somana hosts a growing library of podcasts covering topics like technology, culture, personal development, 
+            business, health, entertainment, and more. Each episode is uploaded directly by independent creators who 
+            own their content and connect authentically with their listeners. Whether you prefer quick ten-minute 
+            insights or hour-long deep-dives, you will find audio content that matches your interests.
+          </p>
+          <p className="text-stone-500 text-sm leading-relaxed mt-3">
+            All podcasts on Somana are free to stream — no subscription required. You can listen directly in your 
+            browser using our built-in audio player. We add new episodes regularly as our community of podcasters 
+            continues to grow. If you are a podcaster looking for a platform to host and share your episodes, 
+            visit our contribute page to learn how to get started on Somana.
+          </p>
+        </section>
       </div>
     </div>
   );

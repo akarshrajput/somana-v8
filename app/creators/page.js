@@ -1,7 +1,7 @@
 import React from "react";
 import TopCreatorsList from "@/app/_components/userComponents/TopCreatorsList";
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 export const metadata = {
   title: "Top Creators on Somana",
@@ -37,6 +37,22 @@ const page = () => {
           Join our community, share your work, and see your name on the leaderboard!
         </p>
         <TopCreatorsList />
+
+        <section className="mt-12 pt-6 border-t border-stone-200">
+          <h2 className="text-lg font-semibold text-stone-800 mb-3">How the Creator Leaderboard Works</h2>
+          <p className="text-stone-500 text-sm leading-relaxed">
+            Every creator on Somana earns Experience Points through their contributions. Publishing a story, 
+            uploading a podcast episode, or sharing an original music track adds to your XP score. The more 
+            consistently you contribute quality content, the higher you climb on the leaderboard. This system 
+            rewards dedication and creativity rather than follower counts or viral metrics.
+          </p>
+          <p className="text-stone-500 text-sm leading-relaxed mt-3">
+            Becoming a top creator on Somana means being recognized as one of the most active and valued voices 
+            on the platform. Top creators get featured on the homepage, receive higher visibility in topic archives, 
+            and build a loyal readership over time. Whether you write about technology, record storytelling podcasts, 
+            or produce indie music, there is a place for you in our creator community.
+          </p>
+        </section>
       </div>
     </div>
   );

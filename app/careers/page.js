@@ -1,6 +1,6 @@
 import React from "react";
 
-const BASE_URL = "https://somana.in";
+const BASE_URL = "https://www.somana.in";
 
 export const metadata = {
   title: "Careers at Somana",
@@ -62,6 +62,22 @@ const page = () => {
             Send your resume, portfolio, or a brief intro to: <a href="mailto:careers@somana.in" className="text-blue-600 hover:underline">careers@somana.in</a>
           </p>
         </div>
+
+        <section className="mt-12 pt-6 border-t border-stone-200 max-w-4xl">
+          <h2 className="text-lg font-semibold text-stone-800 mb-3">Life at Somana</h2>
+          <p className="text-stone-500 text-sm leading-relaxed">
+            At Somana, you will work alongside a small, agile team that cares deeply about independent content 
+            creation and digital storytelling. We use modern technologies including Next.js, React, Node.js, 
+            and MongoDB to build fast, scalable features that serve thousands of creators and readers every day. 
+            We prioritize clean code, thoughtful design, and user-first engineering decisions.
+          </p>
+          <p className="text-stone-500 text-sm leading-relaxed mt-3">
+            Our team members enjoy flexible working hours, the freedom to experiment with new ideas, and the 
+            satisfaction of building a platform that genuinely helps independent creators grow their audiences. 
+            If you are passionate about media, technology, and empowering creative voices, Somana is the right 
+            place for you to make a meaningful impact.
+          </p>
+        </section>
       </div>
     </div>
   );

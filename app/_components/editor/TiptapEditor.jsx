@@ -71,6 +71,13 @@ const TiptapEditor = ({
     immediatelyRender: false, // Add this line to fix SSR hydration
   });
 
+  // Sync editor content when the content prop updates asynchronously (e.g., from DB fetch)
+  React.useEffect(() => {
+    if (editor && content !== undefined && content !== editor.getHTML()) {
+      editor.commands.setContent(content);
+    }
+  }, [content, editor]);
+
   const setLink = React.useCallback(() => {
     const previousUrl = editor?.getAttributes("link").href;
     const url = window.prompt("URL", previousUrl);
@@ -102,6 +109,7 @@ const TiptapEditor = ({
       <div className="flex flex-wrap items-center gap-1 p-2 border-b border-gray-200 dark:border-gray-700">
         {/* History */}
         <button
+          type="button"
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().undo()}
           className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50"
@@ -110,6 +118,7 @@ const TiptapEditor = ({
           <Undo2Icon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().redo()}
           className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50"
@@ -117,11 +126,12 @@ const TiptapEditor = ({
         >
           <Redo2Icon className="w-4 h-4" />
         </button>
-
+ 
         <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-1" />
-
+ 
         {/* Text Formatting */}
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
@@ -132,6 +142,7 @@ const TiptapEditor = ({
           <BoldIcon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
@@ -142,6 +153,7 @@ const TiptapEditor = ({
           <ItalicIcon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           disabled={!editor.can().chain().focus().toggleUnderline().run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
@@ -152,6 +164,7 @@ const TiptapEditor = ({
           <UnderlineIcon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleStrike().run()}
           disabled={!editor.can().chain().focus().toggleStrike().run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
@@ -162,6 +175,7 @@ const TiptapEditor = ({
           <StrikethroughIcon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleHighlight().run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
             editor.isActive("highlight") ? "bg-gray-100 dark:bg-gray-800" : ""
@@ -171,6 +185,7 @@ const TiptapEditor = ({
           <HighlighterIcon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleCode().run()}
           disabled={!editor.can().chain().focus().toggleCode().run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
@@ -180,11 +195,12 @@ const TiptapEditor = ({
         >
           <CodeIcon className="w-4 h-4" />
         </button>
-
+ 
         <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-1" />
-
+ 
         {/* Headings */}
         <button
+          type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 1 }).run()
           }
@@ -198,6 +214,7 @@ const TiptapEditor = ({
           <Heading1Icon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
@@ -211,6 +228,7 @@ const TiptapEditor = ({
           <Heading2Icon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 3 }).run()
           }
@@ -223,11 +241,12 @@ const TiptapEditor = ({
         >
           <Heading3Icon className="w-4 h-4" />
         </button>
-
+ 
         <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-1" />
-
+ 
         {/* Lists */}
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
             editor.isActive("bulletList") ? "bg-gray-100 dark:bg-gray-800" : ""
@@ -237,6 +256,7 @@ const TiptapEditor = ({
           <ListIcon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
             editor.isActive("orderedList") ? "bg-gray-100 dark:bg-gray-800" : ""
@@ -245,11 +265,12 @@ const TiptapEditor = ({
         >
           <ListOrderedIcon className="w-4 h-4" />
         </button>
-
+ 
         <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-1" />
-
+ 
         {/* Blocks */}
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
             editor.isActive("blockquote") ? "bg-gray-100 dark:bg-gray-800" : ""
@@ -259,6 +280,7 @@ const TiptapEditor = ({
           <QuoteIcon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
             editor.isActive("codeBlock") ? "bg-gray-100 dark:bg-gray-800" : ""
@@ -267,11 +289,12 @@ const TiptapEditor = ({
         >
           <Code2Icon className="w-4 h-4" />
         </button>
-
+ 
         <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-1" />
-
+ 
         {/* Links */}
         <button
+          type="button"
           onClick={setLink}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
             editor.isActive("link") ? "bg-gray-100 dark:bg-gray-800" : ""
@@ -282,6 +305,7 @@ const TiptapEditor = ({
         </button>
         {editor.isActive("link") && (
           <button
+            type="button"
             onClick={() => editor.chain().focus().unsetLink().run()}
             className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800"
             title="Remove Link"
@@ -289,11 +313,12 @@ const TiptapEditor = ({
             <UnlinkIcon className="w-4 h-4" />
           </button>
         )}
-
+ 
         <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-1" />
-
+ 
         {/* Text Alignment */}
         <button
+          type="button"
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
             editor.isActive({ textAlign: "left" })
@@ -305,6 +330,7 @@ const TiptapEditor = ({
           <AlignLeftIcon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
             editor.isActive({ textAlign: "center" })
@@ -316,6 +342,7 @@ const TiptapEditor = ({
           <AlignCenterIcon className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
           className={`p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 ${
             editor.isActive({ textAlign: "right" })
@@ -326,9 +353,9 @@ const TiptapEditor = ({
         >
           <AlignRightIcon className="w-4 h-4" />
         </button>
-
+ 
         <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-1" />
-
+ 
         {/* Color */}
         <input
           type="color"
@@ -340,17 +367,19 @@ const TiptapEditor = ({
           title="Text Color"
         />
         <button
+          type="button"
           onClick={() => editor.chain().focus().unsetColor().run()}
           className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800"
           title="Reset Color"
         >
           <PaintBucketIcon className="w-4 h-4" />
         </button>
-
+ 
         <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-1" />
-
+ 
         {/* Clear Formatting */}
         <button
+          type="button"
           onClick={() =>
             editor.chain().focus().clearNodes().unsetAllMarks().run()
           }

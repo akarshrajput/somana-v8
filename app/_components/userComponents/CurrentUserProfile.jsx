@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const fetchUserData = async (userId) => {
   const res = await axios.get(`/api/v1/users/${userId}`);
@@ -120,11 +121,18 @@ const CurrentUserProfile = ({ session }) => {
         className="flex flex-col gap-6 text-sm w-full"
       >
         <div className="flex items-center gap-6">
-          <img
-            src={userProfile.photo}
-            alt={`${userProfile.name}`}
-            className="w-24 h-24 rounded-full border"
-          />
+          <Avatar className="w-24 h-24 border">
+            {userProfile.photo && (
+              <AvatarImage 
+                src={userProfile.photo} 
+                alt={userProfile.name} 
+                className="object-cover" 
+              />
+            )}
+            <AvatarFallback className="font-bold text-3xl uppercase bg-stone-100 text-stone-700 select-none flex items-center justify-center w-full h-full">
+              {userProfile.name?.[0] || "U"}
+            </AvatarFallback>
+          </Avatar>
           <div>
             <p className="font-semibold text-xl">{userProfile.name}</p>
             <p className="text-muted-foreground">@{userProfile.userName}</p>

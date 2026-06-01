@@ -13,6 +13,7 @@ import SearchInput from "./SearchInput";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/app/_lib/auth";
 import XPBadgeHeader from "./XPBadgeHeader";
+import ProfileDropdown from "./ProfileDropdown";
 
 const EndNav = async ({ session }) => {
   return (
@@ -37,9 +38,7 @@ const EndNav = async ({ session }) => {
         )}
       </div>
       {session?.user ? (
-        <Link href="/me">
-          <img src={session?.user?.photo} className="size-8 rounded-full" />
-        </Link>
+        <ProfileDropdown user={session.user} />
       ) : (
         <>
           <User size={16} />

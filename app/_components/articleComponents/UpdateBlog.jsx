@@ -88,25 +88,36 @@ const UpdateBlog = ({ storyId, supabaseURL, session, hostname }) => {
   const [featuredImage, setFeaturedImage] = useState(null);
   const [currentFeaturedImage, setCurrentFeaturedImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
 
   const router = useRouter();
 
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
+        setIsFetching(true);
         const response = await axios.get(`/api/v1/blogs/${storyId}`);
         const data = response?.data?.data;
 
-        setHeading(data.heading);
-        setDescription(data.description);
-        setFileLinks(data.fileLinks);
-        setContent(data.content);
-        setTags(data.tags);
-        setGenre(data.genre);
-        setUserId(data.author._id);
-        setCurrentFeaturedImage(data.featuredImage);
+        setHeading(data.heading || "");
+        setDescription(data.description || "");
+        setFileLinks(data.fileLinks || "");
+        setContent(data.content || "");
+        setTags(data.tags || "");
+        setGenre(data.genre || "Blog");
+        
+        // Handle both populated object and unpopulated string ID for author
+        const authorId = typeof data.author === "object" && data.author !== null 
+          ? data.author._id 
+          : data.author;
+        setUserId(authorId || "");
+        
+        setCurrentFeaturedImage(data.featuredImage || "");
       } catch (error) {
         console.error("Error fetching blog data:", error);
+        toast.error("Failed to load story details");
+      } finally {
+        setIsFetching(false);
       }
     };
 
@@ -115,18 +126,26 @@ const UpdateBlog = ({ storyId, supabaseURL, session, hostname }) => {
     }
   }, [storyId]);
 
+  if (isFetching) {
+    return (
+      <div className="flex items-center justify-center min-h-[300px]">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-stone-800"></div>
+      </div>
+    );
+  }
+
   if (!session) {
     return (
-      <div className="text-center">
-        <p className="font-medium">No Permission to edit this Story</p>
+      <div className="text-center py-10">
+        <p className="font-medium text-stone-600">No Permission to edit this Story</p>
       </div>
     );
   }
 
   if (session.user.role !== "admin" && session.user.userId !== userId) {
     return (
-      <div className="text-center">
-        <p className="font-medium">No Permission to edit this Story</p>
+      <div className="text-center py-10">
+        <p className="font-medium text-stone-600">No Permission to edit this Story</p>
       </div>
     );
   }

@@ -4,14 +4,30 @@ import Note from "@/app/_models/noteModel";
 import Link from "next/link";
 import { Folder, ArrowRight } from "lucide-react";
 
-export const metadata = {
-  title: "Notes & Study Materials — Somana",
-  description: "Explore a comprehensive collection of college notes, engineering materials, and course study guides. Find structured content uploaded by the community.",
-  keywords: "college notes, engineering notes, study materials, computer science notes, somana notes",
-  alternates: {
-    canonical: "https://www.somana.in/notes",
-  },
-};
+export async function generateMetadata() {
+  await connectMongoDB();
+  
+  const rootFolders = await Note.find({ parent: null }).select("name category").lean();
+  
+  const collegeNames = rootFolders.filter(f => f.category === "Colleges").map(f => f.name).join(", ");
+  const courseNames = rootFolders.filter(f => f.category === "Courses").map(f => f.name).join(", ");
+  const dynamicKeywords = rootFolders.map(f => `${f.name} notes`).join(", ");
+
+  return {
+    title: "Notes & Study Materials — Somana",
+    description: `Explore a comprehensive collection of college notes, engineering materials, and course study guides. Find structured content for ${collegeNames || "top colleges"} including ${courseNames || "various courses"}.`,
+    keywords: `college notes, engineering notes, study materials, computer science notes, somana notes, ${dynamicKeywords}`,
+    alternates: {
+      canonical: "https://www.somana.in/notes",
+    },
+    openGraph: {
+      title: "Notes & Study Materials | Somana",
+      description: `Free notes and study materials for ${collegeNames || "top colleges"}.`,
+      type: "website",
+      url: "https://www.somana.in/notes",
+    },
+  };
+}
 
 export default async function NotesPage() {
   await connectMongoDB();
@@ -57,9 +73,22 @@ export default async function NotesPage() {
     );
   };
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Notes & Study Materials",
+    "description": "A comprehensive directory of free college notes, previous year papers, and study materials.",
+    "url": "https://www.somana.in/notes",
+  };
+
   return (
-    <div className="min-h-screen bg-stone-50/50 py-12">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="min-h-screen bg-stone-50/50 py-12">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
         
         {/* Header Hero */}
         <div className="mb-12 text-center max-w-2xl mx-auto">
@@ -79,5 +108,6 @@ export default async function NotesPage() {
 
       </div>
     </div>
+    </>
   );
 }

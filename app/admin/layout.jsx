@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import connectMongoDB from "@/app/_lib/mongodb";
 import User from "@/app/_models/userModel";
 import Link from "next/link";
+import { headers } from "next/headers";
 import Sidebar from "./_components/Sidebar";
 import { 
   BarChart3, 
@@ -39,8 +40,19 @@ export default async function AdminLayout({ children }) {
     dbUser = JSON.parse(JSON.stringify(dbUser));
   }
 
-  // 3. If user is not an admin, render a sleek Access Denied view that overlays the public site
-  if (!dbUser || dbUser.role !== "admin") {
+  // 3. Read current path to enforce route-specific access for restricted roles
+  const headersList = await headers();
+  const currentPath = headersList.get("x-pathname") || "/admin";
+
+  const isNoteManager = dbUser?.role === "note-manager";
+  const isAdmin = dbUser?.role === "admin";
+  const isAuthorized = isAdmin || isNoteManager;
+  
+  // If note-manager, they can ONLY access /admin/notes-management
+  const isNoteManagerAccessingRestrictedPath = isNoteManager && currentPath !== "/admin/notes-management";
+
+  // 4. If user is not authorized, or is accessing a restricted path, render Access Denied
+  if (!isAuthorized || isNoteManagerAccessingRestrictedPath) {
     return (
       <div className="fixed inset-0 z-[60] bg-stone-50 flex items-center justify-center px-4">
         <div className="w-full max-w-md text-center p-8 border border-stone-200 rounded-2xl bg-white shadow-xs flex flex-col items-center gap-6">
@@ -65,13 +77,13 @@ export default async function AdminLayout({ children }) {
 
   // 4. Render Admin Layout overlaying the public site with z-[60]
   return (
-    <div className="fixed inset-0 z-[60] bg-stone-50 flex overflow-hidden text-stone-800">
+    <div className="fixed inset-0 z-[60] bg-stone-50 flex flex-col md:flex-row overflow-hidden text-stone-800">
       {/* Sidebar */}
       <Sidebar user={dbUser} />
 
       {/* Main Content Pane */}
       <main className="flex-1 overflow-y-auto h-full bg-stone-50/50">
-        <div className="p-8 max-w-[1400px] mx-auto min-h-full flex flex-col">
+        <div className="p-4 md:p-8 max-w-[1400px] mx-auto min-h-full flex flex-col w-full">
           {children}
         </div>
       </main>

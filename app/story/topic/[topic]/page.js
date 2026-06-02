@@ -99,8 +99,8 @@ const page = async ({ params }) => {
               <>
                 <p className="text-stone-600 text-sm leading-relaxed max-w-4xl">
                   Welcome to the {topicName} archive on Somana. This section gathers a curated selection of articles,
-                  creative essays, personal reflections, and informative logs written by independent creators from India
-                  and around the world. Dive in to explore unique angles, fresh perspectives, and deep insights
+                  creative essays, personal reflections, and informative logs written by independent creators from around the world.
+                  Every story and note on Somana is handcrafted by real people. Dive in to explore unique angles, fresh perspectives, and deep insights
                   on the subject of {topicName.toLowerCase()}, and discover talented new writers who shape the community.
                 </p>
                 <p className="text-stone-600 text-sm leading-relaxed max-w-4xl mt-3">

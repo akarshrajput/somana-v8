@@ -31,7 +31,7 @@ export async function generateMetadata({ params }) {
       title: `${userProfile.name} (@${userProfile.userName}) — Somana`,
       description:
         userProfile.bio ||
-        `Explore stories, podcasts, and music by ${userProfile.name} on Somana.`,
+        `Explore stories and podcasts by ${userProfile.name} on Somana.`,
       alternates: { canonical: `${BASE_URL}/user/${username}` },
       openGraph: {
         type: "profile",

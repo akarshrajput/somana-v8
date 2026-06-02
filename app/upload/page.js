@@ -3,7 +3,7 @@ import React from "react";
 
 export const metadata = {
   title: "Upload Content — Somana",
-  description: "Upload your stories, podcasts, and music to Somana.",
+  description: "Upload your stories and podcasts to Somana.",
   robots: { index: false, follow: false },
 };
 
@@ -23,12 +23,6 @@ const page = () => {
             className="text-sm bg-neutral-100 border rounded p-1 px-2 font-medium"
           >
             Upload Podcast
-          </Link>
-          <Link
-            href="/music/upload"
-            className="text-sm bg-neutral-100 border rounded p-1 px-2 font-medium"
-          >
-            Upload Music
           </Link>
         </div>
       </div>

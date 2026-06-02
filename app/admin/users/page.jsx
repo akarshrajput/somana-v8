@@ -211,6 +211,7 @@ export default function AdminUsersPage() {
               <option value="user">User</option>
               <option value="guide">Guide</option>
               <option value="admin">Admin</option>
+              <option value="note-manager">Note Manager</option>
             </select>
           </div>
 
@@ -289,6 +290,7 @@ export default function AdminUsersPage() {
                         <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${
                           user.role === "admin" ? "bg-red-50 text-red-700 border-red-100" :
                           user.role === "guide" ? "bg-amber-50 text-amber-700 border-amber-100" :
+                          user.role === "note-manager" ? "bg-purple-50 text-purple-700 border-purple-100" :
                           "bg-stone-50 text-stone-600 border-stone-150"
                         }`}>
                           {user.role}
@@ -441,7 +443,7 @@ export default function AdminUsersPage() {
 
             {/* Edit fields form */}
             <form onSubmit={handleEditSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Role select */}
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-bold text-stone-500 uppercase tracking-wider">Role Permissions</label>
@@ -453,6 +455,7 @@ export default function AdminUsersPage() {
                     <option value="user">User (Standard)</option>
                     <option value="guide">Guide (Creator)</option>
                     <option value="admin">Admin (Full Control)</option>
+                    <option value="note-manager">Note Manager (Notes Panel)</option>
                   </select>
                 </div>
 
@@ -476,7 +479,7 @@ export default function AdminUsersPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {/* Level input */}
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-bold text-stone-500 uppercase tracking-wider">Level</label>

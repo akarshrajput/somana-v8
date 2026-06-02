@@ -11,7 +11,6 @@ const staticRoutes = [
   { url: `${BASE_URL}/events`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
   { url: `${BASE_URL}/privacy-policy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
   { url: `${BASE_URL}/search`, lastModified: new Date(), changeFrequency: "always", priority: 0.5 },
-  { url: `${BASE_URL}/music`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
   { url: `${BASE_URL}/podcast`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
 ];
 
@@ -20,7 +19,7 @@ const storyTopics = [
   "Career", "Cryptocurrency", "Culture", "Crafts", "Design", "Education",
   "Entertainment", "Environmental", "Fashion", "Finance", "Fitness", "Food",
   "Gaming", "Gardening", "Health", "History", "Home", "Humor", "Interests",
-  "Investing", "Legal", "Lifestyle", "Luxury", "Marketing", "Movies", "Music",
+  "Investing", "Legal", "Lifestyle", "Luxury", "Marketing", "Movies", 
   "News", "Nonprofit", "Parenting", "Pets", "Photography", "Politics", "Estate",
   "Relationships", "Science", "Shopping", "Social", "Space", "Spirituality",
   "Sports", "Startups", "Story", "Technology", "Tips", "Travel", "Volunteer",
@@ -53,24 +52,10 @@ async function fetchAllUsernames() {
   }
 }
 
-async function fetchAllMusicIds() {
-  try {
-    const res = await fetch(`${BASE_URL}/api/v1/music?limit=1000&fields=_id,updatedAt`, {
-      next: { revalidate: 3600 },
-    });
-    if (!res.ok) return [];
-    const json = await res.json();
-    return json?.data?.tracks || [];
-  } catch {
-    return [];
-  }
-}
-
 export default async function sitemap() {
-  const [blogs, users, music] = await Promise.allSettled([
+  const [blogs, users] = await Promise.allSettled([
     fetchAllBlogSlugs(),
     fetchAllUsernames(),
-    fetchAllMusicIds(),
   ]);
 
   const blogRoutes =
@@ -93,16 +78,6 @@ export default async function sitemap() {
         }))
       : [];
 
-  const musicRoutes =
-    music.status === "fulfilled"
-      ? music.value.map((track) => ({
-          url: `${BASE_URL}/music/${track._id}`,
-          lastModified: track.updatedAt ? new Date(track.updatedAt) : new Date(),
-          changeFrequency: "monthly",
-          priority: 0.6,
-        }))
-      : [];
-
   const topicRoutes = storyTopics.map((topic) => ({
     url: `${BASE_URL}/story/topic/${topic.toLowerCase()}`,
     lastModified: new Date(),
@@ -115,6 +90,5 @@ export default async function sitemap() {
     ...topicRoutes,
     ...blogRoutes,
     ...userRoutes,
-    ...musicRoutes,
   ];
 }

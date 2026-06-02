@@ -21,17 +21,20 @@ const OG_IMAGE = `${BASE_URL}/logo.png`;
 export const metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Somana — Stories, Music & Podcasts",
+    default: "Somana — Stories, Podcasts & Notes",
     template: "%s | Somana",
   },
   description:
-    "Somana is a creative content platform for discovering and sharing stories, blogs, podcasts, college notes, and music from independent creators across India and beyond.",
+    "Somana is a creative content platform for discovering and sharing stories, blogs, podcasts, and college notes from independent creators across the globe.",
   keywords: [
     "somana",
     "stories",
+    "creative",
+    "global creators",
+    "notes",
+    "study materials",
+    "blogs",
     "podcasts",
-    "music",
-    "indian creators",
     "creative platform",
     "blog",
     "independent content",
@@ -102,15 +105,15 @@ export const metadata = {
     locale: "en_IN",
     url: BASE_URL,
     siteName: "Somana",
-    title: "Somana — Stories, Music & Podcasts",
+    title: "Somana — Stories, Podcasts & Notes",
     description:
-      "Discover stories, podcasts, and music from independent creators. Somana is India's creative content platform.",
+      "Discover stories, podcasts, and notes from independent creators. Somana is a global creative content platform.",
     images: [
       {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Somana — Stories, Music & Podcasts",
+        alt: "Somana — Stories, Podcasts & Notes",
         type: "image/png",
       },
     ],
@@ -119,9 +122,9 @@ export const metadata = {
     card: "summary_large_image",
     site: "@somana_in",
     creator: "@somana_in",
-    title: "Somana — Stories, Music & Podcasts",
+    title: "Somana — Stories, Podcasts & Notes",
     description:
-      "Discover stories, podcasts, and music from independent creators. Somana is India's creative content platform.",
+      "Discover stories, podcasts, and notes from independent creators. Somana is a global creative content platform.",
     images: [OG_IMAGE],
   },
   icons: {
@@ -145,8 +148,7 @@ const websiteJsonLd = {
       "@id": `${BASE_URL}/#website`,
       url: BASE_URL,
       name: "Somana",
-      description:
-        "Somana is a creative content platform for stories, podcasts, and music.",
+      description: "Somana is a creative content platform for stories, podcasts, and notes.",
       publisher: { "@id": `${BASE_URL}/#organization` },
       potentialAction: {
         "@type": "SearchAction",

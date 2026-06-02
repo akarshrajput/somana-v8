@@ -44,7 +44,7 @@ export default async function NotesPage() {
 
     return (
       <section className="mb-12">
-        <div className="flex justify-between items-end mb-6 border-b border-stone-200 pb-2">
+        <div className="flex justify-between items-end mb-6">
           <h2 className="text-2xl font-bold text-stone-900">{title}</h2>
           <Link href={exploreLink} className="text-sm font-medium text-stone-600 hover:text-stone-900 flex items-center gap-1 transition">
             Explore all {title.toLowerCase()} <ArrowRight size={14} />
@@ -95,7 +95,7 @@ export default async function NotesPage() {
           <h1 className="text-4xl font-extrabold tracking-tight text-stone-900 mb-4">
             Notes & Study Materials
           </h1>
-          <p className="text-stone-600">
+          <p className="text-stone-600 hidden sm:block">
             Access a highly curated, structured directory of college notes, engineering resources, and course materials. 
             Navigate through the folders below to find exactly what you need.
           </p>

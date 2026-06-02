@@ -4,9 +4,9 @@ import { Suspense } from "react";
 import Search from "../_components/main/Search";
 
 export const metadata = {
-  title: "Search Somana — Stories, Music & Podcasts",
+  title: "Search Somana — Stories & Podcasts",
   description:
-    "Search for stories, podcasts, music, and creators on Somana. Find the content you love from India's independent creators.",
+    "Search for stories, podcasts, and creators on Somana. Find the content you love from World independent creators.",
   robots: {
     index: false,
     follow: true,

@@ -15,7 +15,7 @@ const Page = async ({ params }) => {
   const hostname = process.env.HOSTNAME;
   return (
     <div className="my-2 mt-6 flex justify-center">
-      <div className="w-[1200px]">
+      <div className="w-full max-w-[1200px] px-4">
         <UpdateBlog
           storyId={storyId}
           session={session}

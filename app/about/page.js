@@ -7,12 +7,12 @@ const BASE_URL = "https://www.somana.in";
 export const metadata = {
   title: "About Somana",
   description:
-    "Learn about Somana — India's independent creative content platform connecting story writers, podcasters, and musicians with audiences who care about authentic voices.",
+    "Learn about Somana — A global independent creative content platform connecting story writers, podcasters, and students with audiences who care about authentic voices and study materials.",
   alternates: { canonical: `${BASE_URL}/about` },
   openGraph: {
     title: "About Somana",
     description:
-      "Learn about Somana — India's independent creative content platform.",
+      "Learn about Somana — A global independent creative content platform.",
     url: `${BASE_URL}/about`,
     type: "website",
     images: [{ url: `${BASE_URL}/logo.png`, width: 1200, height: 630, alt: "About Somana" }],
@@ -20,7 +20,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "About Somana",
-    description: "Learn about Somana — India's independent creative content platform.",
+    description: "Learn about Somana — A global independent creative content platform.",
     images: [`${BASE_URL}/logo.png`],
   },
 };
@@ -32,7 +32,7 @@ const aboutJsonLd = {
   url: `${BASE_URL}/about`,
   name: "About Somana",
   description:
-    "Learn about Somana — India's independent creative content platform.",
+    "Learn about Somana — A global independent creative content platform.",
   isPartOf: { "@id": `${BASE_URL}/#website` },
   breadcrumb: {
     "@type": "BreadcrumbList",

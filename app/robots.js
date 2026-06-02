@@ -13,7 +13,6 @@ export default function robots() {
           "/upload",
           "/upload/",
           "/podcast/upload",
-          "/music/upload",
         ],
       },
       {
@@ -26,7 +25,6 @@ export default function robots() {
           "/story/edit/",
           "/upload",
           "/podcast/upload",
-          "/music/upload",
         ],
       },
     ],

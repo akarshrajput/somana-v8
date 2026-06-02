@@ -4,7 +4,6 @@ import Visit from "@/app/_models/visitModel";
 import User from "@/app/_models/userModel";
 import Blog from "@/app/_models/blogModel";
 import Podcast from "@/app/_models/podcastModel";
-import Music from "@/app/_models/musicModel";
 import Feedback from "@/app/_models/feedbackModel";
 import Comment from "@/app/_models/commentModel";
 import { auth } from "@/app/_lib/auth";
@@ -136,11 +135,10 @@ export async function GET(request) {
     }
 
     // 6. Query system database counts for admin overview cards
-    const [totalUsers, totalStories, totalPodcasts, totalMusic, totalFeedbacks, totalComments] = await Promise.all([
+    const [totalUsers, totalStories, totalPodcasts, totalFeedbacks, totalComments] = await Promise.all([
       User.countDocuments(),
       Blog.countDocuments(),
       Podcast.countDocuments(),
-      Music.countDocuments(),
       Feedback.countDocuments(),
       Comment.countDocuments()
     ]);
@@ -285,7 +283,6 @@ export async function GET(request) {
           totalUsers,
           totalStories,
           totalPodcasts,
-          totalMusic,
           totalFeedbacks,
           totalComments
         },

@@ -25,6 +25,7 @@ export default function ProfileDropdown({ user }) {
   const handleToggle = () => setIsOpen((prev) => !prev);
 
   const isAdmin = user?.role === "admin";
+  const isNoteManager = user?.role === "note-manager";
   
   // Strategy to show the first alphabet if user image is not there or is default avatar
   const hasCustomPhoto = user?.photo && 
@@ -84,6 +85,18 @@ export default function ProfileDropdown({ user }) {
               >
                 <Shield size={14} className="text-stone-400" />
                 <span>Admin Panel</span>
+              </Link>
+            )}
+
+            {/* Note Panel Link (Only rendered for note-managers) */}
+            {isNoteManager && (
+              <Link 
+                href="/admin/notes-management"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-50 hover:text-stone-900 transition border-t border-stone-50"
+              >
+                <Shield size={14} className="text-stone-400" />
+                <span>Note Panel</span>
               </Link>
             )}
           </div>

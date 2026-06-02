@@ -17,7 +17,7 @@ const page = async () => {
 
   return (
     <div className="px-2 my-10 mt-24 flex justify-center">
-      <div className="w-[1200px]">
+      <div className="w-full max-w-[1200px] px-4">
         {session.user.role === "admin" || session.user.role === "guide" ? (
           <UploadPodcast
             session={session}

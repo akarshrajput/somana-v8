@@ -77,7 +77,9 @@ export async function generateMetadata({ params }) {
       blog.genre,
       "somana",
       "story",
-      "india",
+      "read online",
+      "notes",
+      "study materials",
       authorName,
       ...(blog.tags ? blog.tags.split(',').map(t => t.trim()) : []),
     ].filter(Boolean),
@@ -259,9 +261,9 @@ const Page = async ({ params }) => {
             ""
           )}
 
-          <div className="grid grid-cols-6">
+          <div className="grid grid-cols-1 lg:grid-cols-6">
             <div
-              className={`${crimsonText.className} font-medium col-span-5 leading-normal my-10 custom-link text-xl text-gray-900 dark:text-gray-200`}
+              className={`${crimsonText.className} font-medium col-span-1 lg:col-span-5 leading-normal my-10 custom-link text-xl text-gray-900 dark:text-gray-200`}
               dangerouslySetInnerHTML={{ __html: modifiedContent }}
             ></div>
           </div>

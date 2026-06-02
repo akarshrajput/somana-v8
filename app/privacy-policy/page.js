@@ -35,7 +35,7 @@ const page = () => {
           <p>
             We collect information you provide directly (name, email, profile photo) via account registration
             or social login (Google, GitHub). We also collect usage data such as pages visited and content
-            interacted with via Google Analytics. When you publish stories, upload music, or share podcasts, 
+            interacted with via Google Analytics. When you publish stories, share podcasts, or upload notes, 
             the content and associated metadata you provide are stored on our servers to deliver the service.
           </p>
           <h2 className="text-xl font-semibold mt-6">How We Use Your Information</h2>

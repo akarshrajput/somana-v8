@@ -39,7 +39,7 @@ const HorizontalList = () => {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
         {isLoading
           ? Array.from({ length: 9 }).map((_, idx) => (
               <SkeletonCard key={idx} />

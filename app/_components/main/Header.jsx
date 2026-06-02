@@ -8,9 +8,11 @@ const Header = async () => {
   const session = await auth();
   return (
     <div className="py-2 px-4 bg-white flex flex-col items-center shadow-xs">
-      <div className="flex items-center gap-4 w-full">
+      <div className="flex flex-wrap md:flex-nowrap items-center gap-4 w-full">
         <Logo />
-        <Nav />
+        <div className="order-last w-full md:w-auto md:order-none overflow-x-auto no-scrollbar pb-1 md:pb-0">
+          <Nav />
+        </div>
         <EndNav session={session} />
       </div>
     </div>

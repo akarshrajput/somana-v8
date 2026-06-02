@@ -100,8 +100,8 @@ const About = () => {
             <h3 className="text-lg font-medium mb-2">Open & Accessible</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Somana is free to use for both creators and readers. There are no paywalls, no premium tiers, and no 
-              hidden fees. We want to democratize content publishing in India by making professional-grade tools 
-              available to everyone, whether you are a college student writing your first blog or an experienced 
+              hidden fees. We want to democratize content publishing worldwide by making professional-grade tools 
+              accessible to writers, podcasters, and students who want to share notes, whether you are a college student writing your first blog or an experienced 
               journalist sharing investigative reports.
             </p>
           </div>

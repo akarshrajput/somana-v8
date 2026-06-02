@@ -2,11 +2,15 @@ import { NextResponse } from "next/server";
 
 export function middleware(request) {
   const { hostname, pathname, search } = request.nextUrl;
+  
+  // Set x-pathname header so Server Components (like Admin Layout) can read it
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", pathname);
 
   // Redirect non-www to www (permanent 308)
   if (hostname === "somana.in") {
     const url = new URL(`https://www.somana.in${pathname}${search}`);
-    return NextResponse.redirect(url, 308);
+    return NextResponse.redirect(url, 308); // Redirects discard the modified request headers, but that's fine since it's a redirect
   }
 
   // Redirect /story/topic/Uppercase to /story/topic/lowercase (permanent 308)
@@ -21,7 +25,11 @@ export function middleware(request) {
     }
   }
 
-  return NextResponse.next();
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
 
 export const config = {

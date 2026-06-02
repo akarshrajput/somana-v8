@@ -3,14 +3,12 @@ import connectMongoDB from "@/app/_lib/mongodb";
 import User from "@/app/_models/userModel";
 import Blog from "@/app/_models/blogModel";
 import Podcast from "@/app/_models/podcastModel";
-import Music from "@/app/_models/musicModel";
 import Feedback from "@/app/_models/feedbackModel";
 import Comment from "@/app/_models/commentModel";
 import { 
   Users, 
   BookOpen, 
   Mic, 
-  Music as MusicIcon, 
   MessageSquare, 
   Heart,
   Calendar,
@@ -31,14 +29,12 @@ export default async function AdminOverviewPage() {
     totalUsers,
     totalStories,
     totalPodcasts,
-    totalMusic,
     totalFeedbacks,
     totalComments
   ] = await Promise.all([
     User.countDocuments(),
     Blog.countDocuments(),
     Podcast.countDocuments(),
-    Music.countDocuments(),
     Feedback.countDocuments(),
     Comment.countDocuments()
   ]);
@@ -47,7 +43,6 @@ export default async function AdminOverviewPage() {
   const recentUsers = await User.find().sort({ createdAt: -1 }).limit(5).lean();
   const recentStories = await Blog.find().sort({ createdAt: -1 }).limit(3).lean();
   const recentPodcasts = await Podcast.find().sort({ createdAt: -1 }).limit(3).lean();
-  const recentMusic = await Music.find().sort({ createdAt: -1 }).limit(3).lean();
   const recentFeedbacks = await Feedback.find().sort({ createdAt: -1 }).limit(3).lean();
   const recentComments = await Comment.find().sort({ createdAt: -1 }).limit(3).lean();
 
@@ -55,7 +50,6 @@ export default async function AdminOverviewPage() {
     { label: "Users", count: totalUsers, icon: Users, color: "text-indigo-600 bg-indigo-50 border-indigo-100" },
     { label: "Stories", count: totalStories, icon: BookOpen, color: "text-amber-600 bg-amber-50 border-amber-100" },
     { label: "Podcasts", count: totalPodcasts, icon: Mic, color: "text-emerald-600 bg-emerald-50 border-emerald-100" },
-    { label: "Music", count: totalMusic, icon: MusicIcon, color: "text-pink-600 bg-pink-50 border-pink-100" },
     { label: "Feedback", count: totalFeedbacks, icon: MessageSquare, color: "text-rose-600 bg-rose-50 border-rose-100" },
     { label: "Comments", count: totalComments, icon: Heart, color: "text-cyan-600 bg-cyan-50 border-cyan-100" }
   ];
@@ -69,7 +63,7 @@ export default async function AdminOverviewPage() {
       </div>
 
       {/* Grid of total statistics */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {statCards.map((card) => {
           const Icon = card.icon;
           return (
@@ -135,8 +129,7 @@ export default async function AdminOverviewPage() {
                 <tbody className="divide-y divide-stone-100 text-xs font-medium text-stone-600">
                   {[
                     ...recentStories.map(s => ({ title: s.title, type: "Story", date: s.createdAt, id: s._id })),
-                    ...recentPodcasts.map(p => ({ title: p.title, type: "Podcast", date: p.createdAt, id: p._id })),
-                    ...recentMusic.map(m => ({ title: m.title, type: "Music", date: m.createdAt, id: m._id }))
+                    ...recentPodcasts.map(p => ({ title: p.title, type: "Podcast", date: p.createdAt, id: p._id }))
                   ]
                     .sort((a, b) => new Date(b.date) - new Date(a.date))
                     .slice(0, 6)
@@ -146,8 +139,7 @@ export default async function AdminOverviewPage() {
                         <td className="py-3">
                           <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${
                             item.type === "Story" ? "bg-amber-50 text-amber-700 border-amber-100" :
-                            item.type === "Podcast" ? "bg-emerald-50 text-emerald-700 border-emerald-100" :
-                            "bg-pink-50 text-pink-700 border-pink-100"
+                            "bg-emerald-50 text-emerald-700 border-emerald-100"
                           }`}>
                             {item.type}
                           </span>
@@ -155,7 +147,7 @@ export default async function AdminOverviewPage() {
                         <td className="py-3 text-stone-400">{new Date(item.date).toLocaleDateString()}</td>
                       </tr>
                     ))}
-                  {recentStories.length === 0 && recentPodcasts.length === 0 && recentMusic.length === 0 && (
+                  {recentStories.length === 0 && recentPodcasts.length === 0 && (
                     <tr>
                       <td colSpan="3" className="py-8 text-center text-stone-400">No content uploaded yet.</td>
                     </tr>

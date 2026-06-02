@@ -7,7 +7,6 @@ const footerLinks = [
   {
     title: "Explore",
     links: [
-      { name: "Music", href: "/music" },
       { name: "Blogs", href: "/" },
       { name: "Stories", href: "/" },
       { name: "Podcasts", href: "/podcast" },
@@ -37,7 +36,7 @@ const popularTopics = [
   "Career", "Cryptocurrency", "Culture", "Crafts", "Design", "Education",
   "Entertainment", "Environmental", "Fashion", "Finance", "Fitness", "Food",
   "Gaming", "Gardening", "Health", "History", "Home", "Humor", "Interests",
-  "Investing", "Legal", "Lifestyle", "Luxury", "Marketing", "Movies", "Music",
+  "Investing", "Legal", "Lifestyle", "Luxury", "Marketing", "Movies", 
   "News", "Nonprofit", "Parenting", "Pets", "Photography", "Politics", "Estate",
   "Relationships", "Science", "Shopping", "Social", "Space", "Spirituality",
   "Sports", "Startups", "Story", "Technology", "Tips", "Travel", "Volunteer",
@@ -53,7 +52,7 @@ const Footer = () => {
           <div>
             <div className="text-xl font-semibold tracking-tight">Somana</div>
             <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
-              Somana is a creative hub for music, blogs, stories, and podcasts—powered by independent creators. 
+              Somana is a creative hub for blogs, stories, and podcasts—powered by independent creators. 
               We offer a decentralized space for artists and writers to share their voice, build community, 
               and explore human expression. Built with modern web technology, we prioritize high-quality user 
               experience, clean aesthetics, and creator independence. Join us in exploring and shaping the 
@@ -127,11 +126,9 @@ const Footer = () => {
         {/* Bottom */}
         <div className="mt-12 border-t border-muted pt-6 text-xs text-muted-foreground text-center">
           &copy; {new Date().getFullYear()} Somana. All rights reserved.
-          <p className="mt-4 max-w-3xl mx-auto leading-relaxed text-[11px] opacity-80">
-            Somana is designed and maintained as an open-source platform celebrating independent Indian creators. 
-            All stories, audio podcasts, and musical tracks published on this domain are the intellectual property 
-            of their respective creators. We are dedicated to providing a fast, secure, and accessible channel 
-            for digital storytelling. Connect with us for partnerships, creator queries, or developer collaborations.
+          <p className="text-sm text-stone-500 max-w-sm mt-4 mx-auto">
+            Somana is designed and maintained as an open-source platform celebrating independent creators worldwide. 
+            All stories, podcasts, and notes belong to their respective authors.
           </p>
         </div>
       </div>

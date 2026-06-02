@@ -1,7 +1,6 @@
 export const XP_ACTIONS = {
   BLOG_POST: 25, // Blog gives most, but not overpowered
   PODCAST_UPLOAD: 18, // Podcast gets medium XP
-  MUSIC_UPLOAD: 15, // Music slightly less
   COMMENT: 5, // Light reward to encourage engagement
 };
 

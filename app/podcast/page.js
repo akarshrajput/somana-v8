@@ -6,7 +6,7 @@ const BASE_URL = "https://www.somana.in";
 export const metadata = {
   title: "Podcasts — Somana",
   description:
-    "Listen to original podcasts from independent creators on Somana. Explore conversations, storytelling, and ideas from voices across India.",
+    "Listen to original podcasts from independent creators on Somana. Explore conversations, storytelling, and ideas from voices across the globe. Find stories, podcasts, and notes in one place.",
   alternates: { canonical: `${BASE_URL}/podcast` },
   openGraph: {
     title: "Podcasts — Somana",
@@ -31,7 +31,7 @@ const page = () => {
         <h1 className="text-3xl font-bold mb-4">Independent Podcasts</h1>
         <p className="text-stone-600 mb-8 max-w-2xl text-sm leading-relaxed">
           Welcome to the podcast center of Somana. Dive into deep conversations, immersive storytelling, talk shows, 
-          and educational logs recorded by independent podcasters across India. Explore our list of episodes, 
+          and educational logs recorded by independent podcasters around the world. Explore our list of episodes, 
           discover new concepts, and hear directly from passionate creators who share their perspectives. 
           Click on any podcast to launch the built-in player.
         </p>

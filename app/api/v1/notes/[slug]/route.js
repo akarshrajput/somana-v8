@@ -57,3 +57,45 @@ export async function DELETE(request, { params }) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
+export async function PUT(request, { params }) {
+  try {
+    const session = await auth();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { slug } = await params;
+    await connectMongoDB();
+    
+    const body = await request.json();
+    const { name, category, description, keywords, iframeUrl } = body;
+
+    const note = await Note.findOne({ slug });
+    if (!note) {
+      return NextResponse.json({ error: "Note not found" }, { status: 404 });
+    }
+
+    // Update fields if provided
+    if (name) {
+      note.name = name;
+      // Re-generate slug since name changed
+      const s = name.split(" ").join("-").toLowerCase();
+      const id = note._id;
+      const u = `${s.substring(0, 40)}-${id.toString().substring(18)}`;
+      const m = u.replace(/[^a-zA-Z0-9-]/g, "");
+      note.slug = m;
+    }
+    
+    if (category !== undefined) note.category = category;
+    if (description !== undefined) note.description = description;
+    if (keywords !== undefined) note.keywords = keywords;
+    if (iframeUrl !== undefined && note.type === "file") note.iframeUrl = iframeUrl;
+
+    await note.save();
+
+    return NextResponse.json(note, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Folder, File, Plus, Trash2, ChevronRight, Home, ExternalLink } from "lucide-react";
+import { Folder, File, Plus, Trash2, ChevronRight, Home, ExternalLink, Edit2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +21,7 @@ export default function NotesManagement() {
   // Modal states
   const [showFolderModal, setShowFolderModal] = useState(false);
   const [showFileModal, setShowFileModal] = useState(false);
+  const [editingNote, setEditingNote] = useState(null);
 
   // Form states
   const [name, setName] = useState("");
@@ -57,30 +58,43 @@ export default function NotesManagement() {
       return toast.error("File requires an Iframe URL");
     }
 
+    // Automatically extract src URL if user pasted a full HTML <iframe> tag
+    let finalIframeUrl = iframeUrl;
+    if (type === "file" && iframeUrl.includes("<iframe")) {
+      const srcMatch = iframeUrl.match(/src=["'](.*?)["']/);
+      if (srcMatch && srcMatch[1]) {
+        finalIframeUrl = srcMatch[1];
+      }
+    }
+
     try {
-      const res = await fetch("/api/v1/notes", {
-        method: "POST",
+      const isEditing = !!editingNote;
+      const url = isEditing ? `/api/v1/notes/${editingNote.slug}` : "/api/v1/notes";
+      const method = isEditing ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type,
           name,
           category: !parentId ? category : undefined,
-          parent: parentId,
+          parent: isEditing ? undefined : parentId, // don't update parent on edit for now
           description,
           keywords,
-          iframeUrl: type === "file" ? iframeUrl : undefined,
+          iframeUrl: type === "file" ? finalIframeUrl : undefined,
         }),
       });
 
       if (res.ok) {
-        toast.success(`${type === "folder" ? "Folder" : "File"} created!`);
+        toast.success(`${type === "folder" ? "Folder" : "File"} ${isEditing ? 'updated' : 'created'}!`);
         setShowFolderModal(false);
         setShowFileModal(false);
         resetForms();
         fetchNotes();
       } else {
         const err = await res.json();
-        toast.error(err.error || "Failed to create");
+        toast.error(err.error || `Failed to ${isEditing ? 'update' : 'create'}`);
       }
     } catch (error) {
       toast.error("Something went wrong");
@@ -107,6 +121,21 @@ export default function NotesManagement() {
     setDescription("");
     setKeywords("");
     setIframeUrl("");
+    setEditingNote(null);
+  };
+
+  const handleEditClick = (note) => {
+    setEditingNote(note);
+    setName(note.name);
+    setDescription(note.description);
+    setKeywords(note.keywords);
+    if (note.category) setCategory(note.category);
+    if (note.type === "file") {
+      setIframeUrl(note.iframeUrl || "");
+      setShowFileModal(true);
+    } else {
+      setShowFolderModal(true);
+    }
   };
 
   const navigateToFolder = (id, fName) => {
@@ -169,12 +198,20 @@ export default function NotesManagement() {
                   >
                     {note.type === "folder" ? <Folder size={24} /> : <File size={24} />}
                   </div>
-                  <button 
-                    onClick={() => handleDelete(note.slug)}
-                    className="p-1.5 text-stone-400 hover:bg-red-50 hover:text-red-600 rounded transition opacity-0 group-hover:opacity-100"
-                  >
-                    <Trash2 size={14} />
-                  </button>
+                  <div className="flex gap-1">
+                    <button 
+                      onClick={() => handleEditClick(note)}
+                      className="p-1.5 text-stone-400 hover:bg-blue-50 hover:text-blue-600 rounded transition opacity-0 group-hover:opacity-100"
+                    >
+                      <Edit2 size={14} />
+                    </button>
+                    <button 
+                      onClick={() => handleDelete(note.slug)}
+                      className="p-1.5 text-stone-400 hover:bg-red-50 hover:text-red-600 rounded transition opacity-0 group-hover:opacity-100"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
                 </div>
                 <h3 
                   onClick={() => note.type === "folder" ? navigateToFolder(note._id, note.name) : null}
@@ -203,7 +240,9 @@ export default function NotesManagement() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
             <h2 className="text-xl font-bold mb-4">
-              {showFolderModal ? "Create New Folder" : "Add File Link"}
+              {editingNote 
+                ? `Edit ${showFolderModal ? 'Folder' : 'File'}` 
+                : (showFolderModal ? "Create New Folder" : "Add File Link")}
             </h2>
             <div className="space-y-4">
               <div>
@@ -249,7 +288,7 @@ export default function NotesManagement() {
                   Cancel
                 </Button>
                 <Button onClick={() => handleSubmit(showFolderModal ? "folder" : "file")}>
-                  Save {showFolderModal ? "Folder" : "File"}
+                  {editingNote ? "Save Changes" : `Save ${showFolderModal ? "Folder" : "File"}`}
                 </Button>
               </div>
             </div>

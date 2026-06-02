@@ -60,6 +60,16 @@ const blogSchema = new mongoose.Schema(
       minlength: [3, "Source must have more than 3 characters."],
       maxlength: [100, "Source must have less than 100 characters."],
     },
+    seoDescription: {
+      type: String,
+      trim: true,
+      maxlength: [300, "SEO Description must be under 300 characters."],
+    },
+    seoKeywords: {
+      type: String,
+      trim: true,
+      maxlength: [500, "SEO Keywords must be under 500 characters."],
+    },
     views: [
       {
         type: mongoose.Schema.ObjectId,

@@ -7,6 +7,7 @@ import Script from "next/script";
 import { UserProvider } from "./_context/UserContext";
 import { Toaster } from "sonner";
 import AnalyticsTracker from "./_components/main/AnalyticsTracker";
+import { Analytics } from "@vercel/analytics/react";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -24,7 +25,7 @@ export const metadata = {
     template: "%s | Somana",
   },
   description:
-    "Somana is a creative content platform for discovering and sharing stories, podcasts, and music from independent creators across India and beyond.",
+    "Somana is a creative content platform for discovering and sharing stories, blogs, podcasts, college notes, and music from independent creators across India and beyond.",
   keywords: [
     "somana",
     "stories",
@@ -238,6 +239,7 @@ export default function RootLayout({ children }) {
             <Toaster richColors closeButton position="top-center" />
           </UserProvider>
         </ReactQueryProvider>
+        <Analytics />
       </body>
     </html>
   );

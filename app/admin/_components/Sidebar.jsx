@@ -10,7 +10,8 @@ import {
   MessageSquare, 
   Settings, 
   Home, 
-  LayoutDashboard
+  LayoutDashboard,
+  Folder
 } from "lucide-react";
 
 export default function Sidebar({ user }) {
@@ -20,6 +21,7 @@ export default function Sidebar({ user }) {
     { href: "/admin", label: "Overview", icon: LayoutDashboard },
     { href: "/admin/analytics", label: "Analytics", icon: BarChart3, badge: "Live" },
     { href: "/admin/users", label: "Users", icon: Users },
+    { href: "/admin/notes-management", label: "Notes", icon: Folder },
     { href: "#", label: "Content", icon: FileText, disabled: true },
     { href: "#", label: "Feedback", icon: MessageSquare, disabled: true },
     { href: "#", label: "Settings", icon: Settings, disabled: true },

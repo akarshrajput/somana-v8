@@ -32,7 +32,12 @@ export default async function AdminLayout({ children }) {
 
   // 2. Fetch user from DB to verify role
   await connectMongoDB();
-  const dbUser = await User.findOne({ email: session.user.email }).lean();
+  let dbUser = await User.findOne({ email: session.user.email }).lean();
+  
+  // Convert Mongoose ObjectIds and Dates to standard strings for Next.js serialization
+  if (dbUser) {
+    dbUser = JSON.parse(JSON.stringify(dbUser));
+  }
 
   // 3. If user is not an admin, render a sleek Access Denied view that overlays the public site
   if (!dbUser || dbUser.role !== "admin") {

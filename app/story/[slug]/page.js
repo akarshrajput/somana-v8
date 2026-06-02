@@ -70,15 +70,16 @@ export async function generateMetadata({ params }) {
 
   return {
     title: blog.heading,
-    description: blog.description,
+    description: blog.seoDescription || blog.description,
     alternates: { canonical: canonicalUrl },
     keywords: [
+      ...(blog.seoKeywords ? blog.seoKeywords.split(',').map(k => k.trim()) : []),
       blog.genre,
       "somana",
       "story",
       "india",
       authorName,
-      ...(blog.tags || []),
+      ...(blog.tags ? blog.tags.split(',').map(t => t.trim()) : []),
     ].filter(Boolean),
     authors: [{ name: authorName }],
     category: blog.genre || "Story",
@@ -132,7 +133,7 @@ const Page = async ({ params }) => {
     "@type": "Article",
     "@id": `${BASE_URL}/story/${slug}#article`,
     headline: article.heading,
-    description: article.description,
+    description: article.seoDescription || article.description,
     image: article.featuredImage ? [article.featuredImage] : [`${BASE_URL}/logo.png`],
     datePublished: article.createdAt,
     dateModified: article.updatedAt || article.createdAt,

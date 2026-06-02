@@ -89,6 +89,8 @@ const WriteBlog = ({ supabaseURL, session, hostname }) => {
   const [fileLinks, setFileLinks] = useState("");
   const [genre, setGenre] = useState("Blog");
   const [featuredImage, setFeaturedImage] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
+  const [seoKeywords, setSeoKeywords] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [useAI, setUseAI] = useState(false);
   const [question, setQuestion] = useState("");
@@ -186,6 +188,8 @@ const WriteBlog = ({ supabaseURL, session, hostname }) => {
         fileLinks,
         tags,
         genre,
+        seoDescription,
+        seoKeywords,
         usedAI: useAI,
         author: session.user.userId,
         featuredImage: imagePath,
@@ -209,6 +213,8 @@ const WriteBlog = ({ supabaseURL, session, hostname }) => {
       setCollectedImages([]); // Clear collected images
       setTags("");
       setFileLinks("");
+      setSeoDescription("");
+      setSeoKeywords("");
     } catch (error) {
       const errorMessage = error.response?.data?.error || error.response?.data?.message || "Error posting story!";
       toast.error(errorMessage);
@@ -397,6 +403,30 @@ const WriteBlog = ({ supabaseURL, session, hostname }) => {
           <Button type="button" className="w-fit" onClick={addFileInput}>
             Add more
           </Button>
+        </div>
+
+        <div className="flex flex-col gap-4 py-4 px-4 border border-stone-200 bg-stone-50 rounded-md">
+          <div className="flex items-center gap-2 mb-1">
+            <Sparkles size={18} className="text-stone-600" />
+            <Label className="text-base font-semibold">Advanced SEO (Optional)</Label>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label>SEO Meta Description</Label>
+            <Textarea
+              value={seoDescription}
+              onChange={(e) => setSeoDescription(e.target.value)}
+              placeholder="A highly optimized description for search engines (max 300 chars)."
+              maxLength={300}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label>SEO Keywords</Label>
+            <Input
+              value={seoKeywords}
+              onChange={(e) => setSeoKeywords(e.target.value)}
+              placeholder="keyword1, keyword2, long tail keyword (comma separated)"
+            />
+          </div>
         </div>
 
         <div className="flex flex-col gap-2">

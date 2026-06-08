@@ -12,15 +12,18 @@ export async function generateMetadata({ params }) {
 
   if (!folder) return { title: "Folder Not Found" };
 
+  const breadcrumbs = await getBreadcrumbs(folder._id);
+  const breadcrumbStr = breadcrumbs.map((crumb) => crumb.name).join(" > ");
+
   return {
-    title: `${folder.name} Notes & Study Materials — Somana`,
+    title: `${breadcrumbStr} Notes & Study Materials — Somana`,
     description: folder.description,
     keywords: folder.keywords,
     alternates: {
       canonical: `https://www.somana.in/notes/folder/${slug}`,
     },
     openGraph: {
-      title: `${folder.name} Notes | Somana`,
+      title: `${breadcrumbStr} Notes | Somana`,
       description: folder.description,
       type: "website",
       url: `https://www.somana.in/notes/folder/${slug}`,

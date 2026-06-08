@@ -14,7 +14,9 @@ export const UserProvider = ({ children }) => {
       const res = await axios.get("/api/v1/users/me"); // SERVER handles auth
       setUser(res.data.data);
     } catch (err) {
-      console.error("Failed to fetch user", err);
+      if (err.response?.status !== 401) {
+        console.error("Failed to fetch user", err);
+      }
       setUser(null);
     } finally {
       setLoading(false);

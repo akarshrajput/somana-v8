@@ -12,15 +12,19 @@ export async function generateMetadata({ params }) {
 
   if (!file) return { title: "File Not Found" };
 
+  const breadcrumbs = await getBreadcrumbs(file.parent);
+  const breadcrumbNames = breadcrumbs.map((b) => b.name);
+  const titlePath = [...breadcrumbNames, file.name].join(" > ");
+
   return {
-    title: `${file.name} — Study Material | Somana Notes`,
+    title: `${titlePath} — Study Material | Somana Notes`,
     description: file.description,
     keywords: file.keywords,
     alternates: {
       canonical: `https://www.somana.in/notes/file/${slug}`,
     },
     openGraph: {
-      title: `${file.name} | Somana Notes`,
+      title: `${titlePath} | Somana Notes`,
       description: file.description,
       type: "article",
       url: `https://www.somana.in/notes/file/${slug}`,

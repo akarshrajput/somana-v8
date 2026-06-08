@@ -60,6 +60,10 @@ const noteSchema = new mongoose.Schema(
   }
 );
 
+// Indexes for search and folder hierarchies
+noteSchema.index({ parent: 1 });
+noteSchema.index({ category: 1 });
+
 // Pre-save hook to generate unique slug based on name and parent/id
 noteSchema.pre("save", function (next) {
   if (this.isModified("name")) {

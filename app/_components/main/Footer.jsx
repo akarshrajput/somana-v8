@@ -1,19 +1,21 @@
-"use client";
-
 import Link from "next/link";
 import { Facebook, Instagram, Twitter, Youtube, Mail } from "lucide-react";
 
 const footerLinks = [
   {
     title: "Explore",
+    description: "Discover insightful blogs, creative stories, and podcasts uploaded by global creators. Find study materials, notes, and academic content.",
     links: [
-      { name: "Blogs", href: "/" },
-      { name: "Stories", href: "/" },
-      { name: "Podcasts", href: "/podcast" },
+      { name: "Blogs & Stories", href: "/" },
+      { name: "Stories Directory", href: "/story/directory" },
+      { name: "Podcasts Directory", href: "/podcast" },
+      { name: "Study Notes & Materials", href: "/notes" },
+      { name: "Colleges Notes Directory", href: "/notes/search?category=Colleges" },
     ],
   },
   {
     title: "Company",
+    description: "Read about the team behind Somana, get in touch for support, view career opportunities, or read our terms and privacy policy.",
     links: [
       { name: "About Us", href: "/about" },
       { name: "Contact", href: "/contact" },
@@ -23,6 +25,7 @@ const footerLinks = [
   },
   {
     title: "Community",
+    description: "Contribute to our open-source project, view the list of top independent creators, and keep up with upcoming events.",
     links: [
       { name: "Contribute", href: "/contribute" },
       { name: "Creators", href: "/creators" },
@@ -90,7 +93,10 @@ const Footer = () => {
           {/* Footer Links */}
           {footerLinks.map((section) => (
             <div key={section.title}>
-              <h2 className="text-md font-medium mb-4">{section.title}</h2>
+              <h2 className="text-md font-medium mb-2">{section.title}</h2>
+              <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+                {section.description}
+              </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {section.links.map((link) => (
                   <li key={link.name}>

@@ -7,7 +7,7 @@ import { Folder, ChevronLeft } from "lucide-react";
 export async function generateMetadata(props) {
   const searchParams = await props.searchParams;
   const category = searchParams?.category || "All";
-  
+
   await connectMongoDB();
   const folders = await Note.find({ parent: null, category: category === "All" ? { $exists: true } : category }).select("name").lean();
   const folderNames = folders.map(f => f.name).join(", ");
@@ -43,13 +43,13 @@ export async function generateMetadata(props) {
 export default async function SearchNotesPage(props) {
   const searchParams = await props.searchParams;
   const category = searchParams?.category || "All";
-  
+
   await connectMongoDB();
   const query = { parent: null };
   if (category !== "All") {
     query.category = category;
   }
-  
+
   const folders = await Note.find(query).sort({ createdAt: -1 }).lean();
 
   const jsonLd = {
@@ -78,14 +78,14 @@ export default async function SearchNotesPage(props) {
           </div>
 
           {folders.length === 0 ? (
-             <div className="py-12 text-center border border-dashed border-stone-300 rounded-xl bg-white">
-               <p className="text-stone-500">No {category.toLowerCase()} found.</p>
-             </div>
+            <div className="py-12 text-center border border-dashed border-stone-300 rounded-xl bg-white">
+              <p className="text-stone-500">No {category.toLowerCase()} found.</p>
+            </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
               {folders.map((folder) => (
-                <Link 
-                  key={folder._id.toString()} 
+                <Link
+                  key={folder._id.toString()}
                   href={`/notes/folder/${folder.slug}`}
                   className="group flex flex-col items-center p-4 bg-white border border-stone-200 rounded-xl hover:border-stone-400 hover:shadow-sm transition text-center"
                 >
@@ -100,6 +100,22 @@ export default async function SearchNotesPage(props) {
               ))}
             </div>
           )}
+
+          {/* Shared Educational Info Block */}
+          <div className="mt-16 bg-white p-6 md:p-8 rounded-2xl border border-stone-200 shadow-xs">
+            <h2 className="text-lg font-bold text-stone-900 mb-3">About Somana Study Materials</h2>
+            <p className="text-sm text-stone-600 leading-relaxed mb-4">
+              Somana Study Materials is an open, student-driven academic directory containing lecture notes, study guides,
+              and previous year question papers. All files are uploaded by independent student contributors and creators
+              aiming to make higher education resources accessible to all. We cover courses from leading universities.
+            </p>
+            <p className="text-sm text-stone-600 leading-relaxed">
+              If you have study materials, question papers, or course syllabus PDFs that you would like to share,
+              please consider joining our community. By contributing your notes, you help fellow students prepare for exams
+              and succeed academically. Navigate to our contribute page to learn more about uploading your resources.
+            </p>
+          </div>
+
         </div>
       </div>
     </>

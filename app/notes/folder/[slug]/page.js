@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cache } from "react";
 import connectMongoDB from "@/app/_lib/mongodb";
 import Note from "@/app/_models/noteModel";
 import Link from "next/link";
@@ -33,10 +33,10 @@ export async function generateMetadata({ params }) {
 
 // Helper to get breadcrumbs by recursively fetching parents (simplified approach for this version)
 // In a highly nested system, a materialized path or recursive aggregation is better.
-async function getBreadcrumbs(folderId) {
+const getBreadcrumbs = cache(async (folderId) => {
   const breadcrumbs = [];
   let currentId = folderId;
-  
+
   // Prevent infinite loops just in case, max depth 10
   let depth = 0;
   while (currentId && depth < 10) {
@@ -47,7 +47,7 @@ async function getBreadcrumbs(folderId) {
     depth++;
   }
   return breadcrumbs;
-}
+});
 
 export default async function FolderPage({ params }) {
   const { slug } = await params;
@@ -67,6 +67,15 @@ export default async function FolderPage({ params }) {
   // Find children (both folders and files)
   const children = await Note.find({ parent: currentFolder._id })
     .sort({ type: -1, createdAt: -1 }) // folders first, then files
+    .lean();
+
+  // Fetch 5 other folders for cross-linking SEO
+  const recommendedFolders = await Note.find({
+    type: "folder",
+    _id: { $ne: currentFolder._id }
+  })
+    .select("name slug")
+    .limit(5)
     .lean();
 
   const breadcrumbs = await getBreadcrumbs(currentFolder._id);
@@ -89,7 +98,7 @@ export default async function FolderPage({ params }) {
       />
       <div className="min-h-screen bg-stone-50/50 py-8">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          
+
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-stone-500 mb-8 overflow-x-auto whitespace-nowrap pb-2 no-scrollbar">
             <Link href="/notes" className="hover:text-stone-900 flex items-center gap-1">
@@ -98,7 +107,7 @@ export default async function FolderPage({ params }) {
             {breadcrumbs.map((crumb, idx) => (
               <React.Fragment key={crumb._id.toString()}>
                 <ChevronRight size={14} className="text-stone-300 flex-shrink-0" />
-                <Link 
+                <Link
                   href={`/notes/folder/${crumb.slug}`}
                   className={`hover:text-stone-900 truncate max-w-[150px] ${idx === breadcrumbs.length - 1 ? "font-semibold text-stone-800 pointer-events-none" : ""}`}
                 >
@@ -169,6 +178,44 @@ export default async function FolderPage({ params }) {
               ))}
             </div>
           )}
+
+          {/* Recommended Folders for SEO Internal Linking */}
+          {recommendedFolders.length > 0 && (
+            <div className="mt-12">
+              <h2 className="text-lg font-bold text-stone-900 mb-4">Related Study Folders</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {recommendedFolders.map((recFolder) => (
+                  <Link
+                    key={recFolder._id.toString()}
+                    href={`/notes/folder/${recFolder.slug}`}
+                    className="flex items-center gap-3 p-4 bg-white border border-stone-200 rounded-xl hover:border-stone-400 hover:shadow-sm transition"
+                  >
+                    <div className="bg-blue-50 text-blue-500 p-2 rounded-lg flex-shrink-0">
+                      <Folder size={20} className="relative z-10" />
+                    </div>
+                    <span className="text-sm font-semibold text-stone-800 truncate">
+                      {recFolder.name}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Shared Educational Info Block */}
+          <div className="mt-16 bg-white p-6 md:p-8 rounded-2xl border border-stone-200 shadow-xs">
+            <h2 className="text-lg font-bold text-stone-900 mb-3">About Somana Study Materials</h2>
+            <p className="text-sm text-stone-600 leading-relaxed mb-4">
+              Somana Study Materials is an open, student-driven academic directory containing lecture notes, study guides,
+              and previous year question papers. All files are uploaded by independent student contributors and creators
+              aiming to make higher education resources accessible to all. We cover courses from leading universities.
+            </p>
+            <p className="text-sm text-stone-600 leading-relaxed">
+              If you have study materials, question papers, or course syllabus PDFs that you would like to share,
+              please consider joining our community. By contributing your notes, you help fellow students prepare for exams
+              and succeed academically. Navigate to our contribute page to learn more about uploading your resources.
+            </p>
+          </div>
 
         </div>
       </div>

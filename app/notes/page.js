@@ -6,9 +6,9 @@ import { Folder, ArrowRight } from "lucide-react";
 
 export async function generateMetadata() {
   await connectMongoDB();
-  
+
   const rootFolders = await Note.find({ parent: null }).select("name category").lean();
-  
+
   const collegeNames = rootFolders.filter(f => f.category === "Colleges").map(f => f.name).join(", ");
   const courseNames = rootFolders.filter(f => f.category === "Courses").map(f => f.name).join(", ");
   const dynamicKeywords = rootFolders.map(f => `${f.name} notes`).join(", ");
@@ -50,12 +50,12 @@ export default async function NotesPage() {
             Explore all {title.toLowerCase()} <ArrowRight size={14} />
           </Link>
         </div>
-        
+
         {/* 8-column grid for large screens, scaling down for smaller screens */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
           {items.map((folder) => (
-            <Link 
-              key={folder._id.toString()} 
+            <Link
+              key={folder._id.toString()}
               href={`/notes/folder/${folder.slug}`}
               className="group flex flex-col items-center p-4 bg-white border border-stone-200 rounded-xl hover:border-stone-400 hover:shadow-sm transition text-center"
             >
@@ -89,25 +89,40 @@ export default async function NotesPage() {
       />
       <div className="min-h-screen bg-stone-50/50 py-12">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-        
-        {/* Header Hero */}
-        <div className="mb-12 text-center max-w-2xl mx-auto">
-          <h1 className="text-4xl font-extrabold tracking-tight text-stone-900 mb-4">
-            Notes & Study Materials
-          </h1>
-          <p className="text-stone-600 hidden sm:block">
-            Access a highly curated, structured directory of college notes, engineering resources, and course materials. 
-            Navigate through the folders below to find exactly what you need.
-          </p>
+
+          {/* Header Hero */}
+          <div className="mb-12 text-center max-w-2xl mx-auto">
+            <h1 className="text-4xl font-extrabold tracking-tight text-stone-900 mb-4">
+              Notes & Study Materials
+            </h1>
+            <p className="text-stone-600 hidden sm:block">
+              Access a highly curated, structured directory of college notes, engineering resources, and course materials.
+              Navigate through the folders below to find exactly what you need.
+            </p>
+          </div>
+
+          {/* Categories */}
+          {renderSection("Colleges", colleges, "/notes/search?category=Colleges")}
+          {renderSection("Courses", courses, "/notes/search?category=Courses")}
+          {renderSection("Other Materials", others, "/notes/search?category=Other")}
+
+          {/* Shared Educational Info Block */}
+          <div className="mt-16 bg-white p-6 md:p-8 rounded-2xl border border-stone-200 shadow-xs max-w-4xl">
+            <h2 className="text-lg font-bold text-stone-900 mb-3">About Somana Study Materials</h2>
+            <p className="text-sm text-stone-600 leading-relaxed mb-4">
+              Somana Study Materials is an open, student-driven academic directory containing lecture notes, study guides,
+              and previous year question papers. All files are uploaded by independent student contributors and creators
+              aiming to make higher education resources accessible to all. We cover courses from leading universities.
+            </p>
+            <p className="text-sm text-stone-600 leading-relaxed">
+              If you have study materials, question papers, or course syllabus PDFs that you would like to share,
+              please consider joining our community. By contributing your notes, you help fellow students prepare for exams
+              and succeed academically. Navigate to our contribute page to learn more about uploading your resources.
+            </p>
+          </div>
+
         </div>
-
-        {/* Categories */}
-        {renderSection("Colleges", colleges, "/notes/search?category=Colleges")}
-        {renderSection("Courses", courses, "/notes/search?category=Courses")}
-        {renderSection("Other Materials", others, "/notes/search?category=Other")}
-
       </div>
-    </div>
     </>
   );
 }

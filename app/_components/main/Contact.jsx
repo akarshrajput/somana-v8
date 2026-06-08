@@ -90,6 +90,20 @@ const Contact = () => {
               </p>
             </div>
           </div>
+
+          <div className="pt-6 border-t border-stone-200">
+            <h2 className="text-lg font-semibold mb-3">Frequently Asked Questions</h2>
+            <div className="space-y-4 text-stone-500 text-xs leading-relaxed">
+              <div>
+                <p className="font-semibold text-stone-700">How do I upload a podcast or write a story?</p>
+                <p>Register and create an account, then head to your dashboard settings. From there, you can access our rich-text editor or the podcast audio uploader directly.</p>
+              </div>
+              <div>
+                <p className="font-semibold text-stone-700">Are the study materials free to download?</p>
+                <p>Yes, all study notes, previous year question papers, and course guides uploaded on Somana are completely free and open for public access by students worldwide.</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Contact Form */}

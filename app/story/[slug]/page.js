@@ -67,10 +67,11 @@ export async function generateMetadata({ params }) {
   const canonicalUrl = `${BASE_URL}/story/${slug}`;
   const ogImage = blog.featuredImage || `${BASE_URL}/logo.png`;
   const authorName = blog.author?.name || "Somana Creator";
+  const uniqueDescription = `${blog.heading} — ${blog.seoDescription || blog.description || "Discover stories, blogs, and podcasts on Somana."}`;
 
   return {
     title: blog.heading,
-    description: blog.seoDescription || blog.description,
+    description: uniqueDescription,
     alternates: { canonical: canonicalUrl },
     keywords: [
       ...(blog.seoKeywords ? blog.seoKeywords.split(',').map(k => k.trim()) : []),
@@ -89,7 +90,7 @@ export async function generateMetadata({ params }) {
       type: "article",
       url: canonicalUrl,
       title: blog.heading,
-      description: blog.description,
+      description: uniqueDescription,
       siteName: "Somana",
       locale: "en_IN",
       images: [
@@ -109,7 +110,7 @@ export async function generateMetadata({ params }) {
       card: "summary_large_image",
       site: "@somana_in",
       title: blog.heading,
-      description: blog.description,
+      description: uniqueDescription,
       images: [ogImage],
     },
   };

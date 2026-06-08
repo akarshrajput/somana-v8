@@ -11,13 +11,13 @@ export async function generateMetadata(props) {
 
   return {
     title: `Stories Directory${page > 1 ? ` (Page ${page})` : ""}`,
-    description: "Browse the complete directory of stories, blogs, and creative content published by independent creators on Somana.",
+    description: `Browse the complete directory of stories, blogs, and creative content published by independent creators on Somana.${page > 1 ? ` (Page ${page})` : ""}`,
     alternates: {
       canonical: `${BASE_URL}/story/directory${page > 1 ? `?page=${page}` : ""}`,
     },
     openGraph: {
       title: `Stories Directory${page > 1 ? ` (Page ${page})` : ""}`,
-      description: "Browse the complete directory of stories, blogs, and creative content on Somana.",
+      description: `Browse the complete directory of stories, blogs, and creative content on Somana.${page > 1 ? ` (Page ${page})` : ""}`,
       url: `${BASE_URL}/story/directory${page > 1 ? `?page=${page}` : ""}`,
       type: "website",
     },

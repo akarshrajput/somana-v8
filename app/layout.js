@@ -138,6 +138,9 @@ export const metadata = {
     // Add your Google Search Console verification token here
     // google: "YOUR_GOOGLE_VERIFICATION_TOKEN",
   },
+  other: {
+    "google-adsense-account": "ca-pub-3750195818284635",
+  },
 };
 
 const websiteJsonLd = {
@@ -218,13 +221,7 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#ffffff" />
         <meta name="color-scheme" content="light dark" />
 
-        {/* Google AdSense */}
-        <meta name="google-adsense-account" content="ca-pub-3750195818284635" />
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3750195818284635"
-          crossOrigin="anonymous"
-        />
+
       </head>
 
       <body className={`${dmSans.className} antialiased`}>

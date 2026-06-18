@@ -6,6 +6,8 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import Link from "next/link";
+
 export default function TopCreatorsList() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -42,9 +44,10 @@ export default function TopCreatorsList() {
           </div>
         ) : (
           users.map((user, index) => (
-            <div
+            <Link
+              href={`/user/${user.userName}`}
               key={user._id}
-              className="flex items-center justify-between border p-2 rounded-xl hover:bg-accent transition"
+              className="flex items-center justify-between border p-2 rounded-xl hover:bg-accent transition cursor-pointer"
             >
               <div className="flex items-center gap-3">
                 <span className="text-lg font-bold text-muted-foreground w-5">
@@ -67,7 +70,7 @@ export default function TopCreatorsList() {
                   <Badge variant="outline">XP: {user.xp}</Badge>
                 )}
               </div>
-            </div>
+            </Link>
           ))
         )}
       </div>

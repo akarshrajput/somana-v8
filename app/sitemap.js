@@ -14,17 +14,7 @@ const staticRoutes = [
   { url: `${BASE_URL}/podcast`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
 ];
 
-const storyTopics = [
-  "Notes", "Blog", "Automotive", "Beauty", "Books", "Business",
-  "Career", "Cryptocurrency", "Culture", "Crafts", "Design", "Education",
-  "Entertainment", "Environmental", "Fashion", "Finance", "Fitness", "Food",
-  "Gaming", "Gardening", "Health", "History", "Home", "Humor", "Interests",
-  "Investing", "Legal", "Lifestyle", "Luxury", "Marketing", "Movies", 
-  "News", "Nonprofit", "Parenting", "Pets", "Photography", "Politics", "Estate",
-  "Relationships", "Science", "Shopping", "Social", "Space", "Spirituality",
-  "Sports", "Startups", "Story", "Technology", "Tips", "Travel", "Volunteer",
-  "Writing"
-];
+const storyTopics = [];
 
 async function fetchAllBlogSlugs() {
   try {

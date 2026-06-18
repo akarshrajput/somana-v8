@@ -29,10 +29,6 @@ const LoginPage = () => {
     signIn("google", { redirectTo: "/" });
   };
 
-  const handleGithubLogin = (e) => {
-    e.preventDefault();
-    signIn("github", { redirectTo: "/" });
-  };
 
   const handleCredentialsSubmit = async (e) => {
     e.preventDefault();
@@ -131,13 +127,6 @@ const LoginPage = () => {
             Continue with Google
           </button>
 
-          <button
-            onClick={handleGithubLogin}
-            className="p-2 cursor-pointer w-full text-sm font-medium rounded-full border bg-stone-50 hover:bg-stone-100 flex items-center justify-center gap-2 text-stone-700 transition"
-          >
-            <Github size={16} />
-            Continue with GitHub
-          </button>
         </div>
 
         {/* Divider */}

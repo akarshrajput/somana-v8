@@ -34,17 +34,7 @@ const footerLinks = [
   },
 ];
 
-const popularTopics = [
-  "Notes", "Blog", "Automotive", "Beauty", "Books", "Business",
-  "Career", "Cryptocurrency", "Culture", "Crafts", "Design", "Education",
-  "Entertainment", "Environmental", "Fashion", "Finance", "Fitness", "Food",
-  "Gaming", "Gardening", "Health", "History", "Home", "Humor", "Interests",
-  "Investing", "Legal", "Lifestyle", "Luxury", "Marketing", "Movies", 
-  "News", "Nonprofit", "Parenting", "Pets", "Photography", "Politics", "Estate",
-  "Relationships", "Science", "Shopping", "Social", "Space", "Spirituality",
-  "Sports", "Startups", "Story", "Technology", "Tips", "Travel", "Volunteer",
-  "Writing"
-];
+const popularTopics = [];
 
 const Footer = () => {
   return (
@@ -79,13 +69,6 @@ const Footer = () => {
               </Link>
             </div>
             <div className="mt-4 font-medium text-gray-600 text-sm">
-              {/* <a
-                href="https://www.linkedin.com/in/akarshrajput"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Akarsh Rajput | Founder & CEO
-              </a> */}
               <p>Akarsh Rajput | Founder & CEO Somana Corp.</p>
             </div>
           </div>
@@ -114,20 +97,22 @@ const Footer = () => {
         </div>
 
         {/* Popular Topics Tag Cloud */}
-        <div className="mt-12 pt-8 border-t border-muted">
-          <h3 className="text-sm font-medium text-foreground mb-4">Popular Topics</h3>
-          <div className="flex flex-wrap gap-2">
-            {popularTopics.map((topic) => (
-              <Link
-                key={topic}
-                href={`/story/topic/${topic.toLowerCase()}`}
-                className="text-[11px] bg-stone-100 hover:bg-neutral-800 hover:text-white dark:bg-neutral-800 dark:hover:bg-stone-100 dark:hover:text-black px-2.5 py-1 rounded-full text-muted-foreground transition duration-200"
-              >
-                {topic}
-              </Link>
-            ))}
+        {popularTopics.length > 0 && (
+          <div className="mt-12 pt-8 border-t border-muted">
+            <h3 className="text-sm font-medium text-foreground mb-4">Popular Topics</h3>
+            <div className="flex flex-wrap gap-2">
+              {popularTopics.map((topic) => (
+                <Link
+                  key={topic}
+                  href={`/story/topic/${topic.toLowerCase()}`}
+                  className="text-[11px] bg-stone-100 hover:bg-neutral-800 hover:text-white dark:bg-neutral-800 dark:hover:bg-stone-100 dark:hover:text-black px-2.5 py-1 rounded-full text-muted-foreground transition duration-200"
+                >
+                  {topic}
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Bottom */}
         <div className="mt-12 border-t border-muted pt-6 text-xs text-muted-foreground text-center">

@@ -6,7 +6,6 @@ import Footer from "./_components/main/Footer";
 import Script from "next/script";
 import { UserProvider } from "./_context/UserContext";
 import { Toaster } from "sonner";
-import AnalyticsTracker from "./_components/main/AnalyticsTracker";
 import { Analytics } from "@vercel/analytics/react";
 
 const dmSans = DM_Sans({
@@ -227,7 +226,6 @@ export default function RootLayout({ children }) {
       <body className={`${dmSans.className} antialiased`}>
         <ReactQueryProvider>
           <UserProvider>
-            <AnalyticsTracker />
             <div className="flex min-h-screen flex-col">
               <div className="sticky top-0 left-0 w-full z-50">
                 <Header />

@@ -2,8 +2,9 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { User, Shield } from "lucide-react";
+import { User, Shield, LogOut } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { signOut } from "next-auth/react";
 
 export default function ProfileDropdown({ user }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -99,6 +100,18 @@ export default function ProfileDropdown({ user }) {
                 <span>Note Panel</span>
               </Link>
             )}
+
+            {/* Logout Link */}
+            <button 
+              onClick={() => {
+                setIsOpen(false);
+                signOut({ callbackUrl: '/' });
+              }}
+              className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-red-600 hover:bg-red-50 transition border-t border-stone-50 text-left"
+            >
+              <LogOut size={14} />
+              <span>Log out</span>
+            </button>
           </div>
         </div>
       )}

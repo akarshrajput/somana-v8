@@ -56,11 +56,11 @@ const BestArticle = () => {
                 {post.description}
               </p>
 
-              <div className="relative h-full bg-neutral-100 dark:bg-neutral-800">
+              <div className="relative w-full h-[300px] md:h-[380px] bg-neutral-100 dark:bg-neutral-800 rounded overflow-hidden mt-4">
                 <img
                   src={post.featuredImage}
                   alt={post.heading}
-                  className="w-full min-h-90 h-full object-cover rounded"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </Link>

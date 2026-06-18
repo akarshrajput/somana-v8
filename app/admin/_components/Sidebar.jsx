@@ -22,7 +22,6 @@ export default function Sidebar({ user }) {
 
   const allLinks = [
     { href: "/admin", label: "Overview", icon: LayoutDashboard },
-    { href: "/admin/analytics", label: "Analytics", icon: BarChart3, badge: "Live" },
     { href: "/admin/users", label: "Users", icon: Users },
     { href: "/admin/notes-management", label: "Notes", icon: Folder },
     { href: "#", label: "Content", icon: FileText, disabled: true },

@@ -7,15 +7,9 @@ const Nav = () => {
     <div className="flex items-center text-xs font-medium">
       <NavButton href="/notes" isFirst={true}>Notes</NavButton>
       <Separator orientation="vertical" />
-      <NavButton href="/">Podcast</NavButton>
+      <NavButton href="/podcast">Podcast</NavButton>
       <Separator orientation="vertical" />
-      <NavButton href="/">Playlists</NavButton>
-      <Separator orientation="vertical" />
-      <NavButton href="/">Tales</NavButton>
-      <Separator orientation="vertical" />
-      <NavButton href="/">New</NavButton>
-      <Separator orientation="vertical" />
-      <NavButton href="/">Special</NavButton>
+      <NavButton href="/story/directory">Blog</NavButton>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import axios from "axios";
 import { PlayCircle } from "lucide-react";
 import { Lora } from "next/font/google";
 import PodcastPlayer from "./PodcastPlayer";
+import { useUser } from "@/app/_context/UserContext";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -32,6 +33,9 @@ const SkeletonCard = () => (
 );
 
 const HorizontalList = () => {
+  const { user } = useUser();
+  const currentUserId = user?._id;
+
   const { data, isLoading, error } = useQuery({
     queryKey: ["podcasts"],
     queryFn: fetchPodcasts,
@@ -47,6 +51,8 @@ const HorizontalList = () => {
           : data?.map((podcast) => (
               <PodcastPlayer
                 key={podcast._id}
+                podcast={podcast}
+                currentUserId={currentUserId}
                 audioUrl={podcast.audioLink}
                 image={podcast.featuredImage}
                 title={podcast.podcastName}
